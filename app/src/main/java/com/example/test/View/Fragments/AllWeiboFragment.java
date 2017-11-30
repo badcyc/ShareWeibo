@@ -1,10 +1,12 @@
 package com.example.test.View.Fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
+
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,6 +45,7 @@ public class AllWeiboFragment extends Fragment {
     MessageAdapter adapter;
     private String mParam1;
     private String mParam2;
+    private Handler handler;
     public AllWeiboFragment(){
 
     }
@@ -57,6 +60,13 @@ public class AllWeiboFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        handler=new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(android.os.Message message) {
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -79,16 +89,14 @@ public class AllWeiboFragment extends Fragment {
         }*/
         View view=inflater.inflate(R.layout.fragment_weibo,null);
         initDate();
-        adapter=new MessageAdapter(lists,getActivity());
+        adapter=new MessageAdapter(lists,context);
+        Log.d("adapter:","finish");
         RecyclerView recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
-
+        Log.d("recyclerView:","finish");
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-//        ProgressBar progressBar=(ProgressBar)recyclerView.findViewById(R.id.progressBar);
-        //      progressBar.setProgress(progress);
         return view;
     }
 
@@ -124,8 +132,9 @@ public class AllWeiboFragment extends Fragment {
                     try {
                         JSONObject jsonObject = new JSONObject(responsedata);
                         JSONArray jsonArray = jsonObject.getJSONArray("statuses");
-                        for(int i=1;i<=10;i++) {
-                            JSONObject jsonObject1 = jsonArray.getJSONObject(0);
+
+                        for(int i=0;i<10;i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             String create_at = jsonObject1.getString("created_at");
                             Log.d("created_at", create_at);
 
@@ -137,19 +146,34 @@ public class AllWeiboFragment extends Fragment {
                             String from_url = jsonObject1.getString("source");
                             Log.d("from_url", from_url);
 
+                            JSONArray pic_urlsArray=jsonObject1.getJSONArray("pic_urls");
+                            int k=pic_urlsArray.length();
+                            ArrayList<String> pic_urls=new ArrayList<>();
+                            for (int j=0;j<k;j++){
+                                pic_urls.add(pic_urlsArray.getJSONObject(j).getString("thumbnail_pic"));
+                            }
+                            String reposts_count=jsonObject1.getString("reposts_count");
+                            String comments_count=jsonObject1.getString("comments_count");
+                            String attitudes_count=jsonObject1.getString("attitudes_count");
+
                             JSONObject user = jsonObject1.getJSONObject("user");
                             //JSONObject nameObject=userArray.getJSONObject(4);
                             String user_name = user.getString("name");
                             Log.d("user_name", user_name);
 
                             //JSONObject picObject=jsonArray.getJSONObject(37);
-                            String pic_url = user.getString("avatar_hd");
-                            Log.d("pic_url", pic_url);
+                            String avatar_hd = user.getString("avatar_hd");
+                            Log.d("avatar_hd", avatar_hd);
+
+
                             User user1=new User();
                             user1.setName(user_name);
-                            Message message=new Message(create_at,content,from_url,pic_url,user1);
+                            user1.setAvatar_hd(avatar_hd);
+                            Message message=new Message(create_at,content,from_url,user1,reposts_count,comments_count,attitudes_count);
+                            message.setPic_urls(pic_urls);
                             lists.add(message);
                         }
+                        handler.sendEmptyMessage(1);
 
                     } catch (JSONException e) {
                         e.printStackTrace();

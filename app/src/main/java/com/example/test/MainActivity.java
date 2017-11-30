@@ -4,33 +4,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.view.View;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.example.test.View.Fragments.AllWeiboFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FrameLayout contentLayout;
     private TextView mTextMessage;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    //private AllWeiboFragment allWeiboFragment=new AllWeiboFragment();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             =new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+              //      mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_dashboard:
                     Intent intent=new Intent(MainActivity.this,WeiboOAuthLoginActivity.class);
@@ -38,7 +42,10 @@ public class MainActivity extends AppCompatActivity
                     finish();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    fragmentTransaction=fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content,new AllWeiboFragment());
+                    Log.d("fragment:","finish");
+                    fragmentTransaction.addToBackStack(null).commit();
                     return true;
             }
             return false;
@@ -48,11 +55,16 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        init();
+
+    }
+
+    private void init(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         contentLayout =(FrameLayout)findViewById(R.id.content);
-        mTextMessage= (TextView)contentLayout.findViewById(R.id.message);
+        //mTextMessage= (TextView)contentLayout.findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -71,8 +83,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
+        fragmentManager=getSupportFragmentManager();
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

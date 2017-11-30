@@ -38,7 +38,7 @@ public class User implements Serializable{
     private int  ptype;
     private boolean  allow_all_comment;
     private String  avatar_large;
-    private String  avatar_hd;
+    private String  avatar_hd;  //头像
     private String  verified_reason;
     private String  verified_trade;
     private String  verified_reason_url;
@@ -71,5 +71,13 @@ public class User implements Serializable{
 
     public String getName() {
         return name;
+    }
+
+    public void setAvatar_hd(String avatar_hd) {
+        this.avatar_hd = avatar_hd;
+    }
+
+    public String getAvatar_hd() {
+        return avatar_hd;
     }
 }

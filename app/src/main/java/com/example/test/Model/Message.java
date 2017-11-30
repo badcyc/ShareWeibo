@@ -1,6 +1,7 @@
 package com.example.test.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by cyc20 on 2017/11/28.
@@ -20,17 +21,23 @@ public class Message implements Serializable{
     private String in_reply_to_status_id;
     private String in_reply_to_user_id;
     private String in_reply_to_screen_name;
-    private String pic_urls;
     private String geo;
     private boolean is_paid;
     private int mblog_vip_type;
+    private ArrayList<String> pic_urls;//图片链接
+    private int reposts_count;
+    private int comments_count;
+    private int attitudes_count;
     private User user;
-    public Message(String created_at,String contentText,String source_url,String pic_urls,User user){
+    public Message(String created_at,String contentText,String source_url,User user,
+                   String reposts_count,String comments_count,String attitudes_count){
         this.contentText=contentText;
         this.created_at=created_at;
         this.source_url=source_url;
-        this.pic_urls=pic_urls;
         this.user=user;
+        this.reposts_count=Integer.valueOf(reposts_count);
+        this.comments_count=Integer.valueOf(comments_count);
+        this.attitudes_count=Integer.valueOf(attitudes_count);
     }
     public void setUser(User user) {
         this.user = user;
@@ -80,7 +87,7 @@ public class Message implements Serializable{
         return mid;
     }
 
-    public String getPic_urls() {
+    public ArrayList<String> getPic_urls() {
         return pic_urls;
     }
 
@@ -136,7 +143,7 @@ public class Message implements Serializable{
         this.is_paid = is_paid;
     }
 
-    public void setPic_urls(String pic_urls) {
+    public void setPic_urls(ArrayList<String> pic_urls) {
         this.pic_urls = pic_urls;
     }
 
@@ -159,4 +166,29 @@ public class Message implements Serializable{
     public void setTruncated(boolean truncated) {
         this.truncated = truncated;
     }
+
+    public void setAttitudes_count(int attitudes_count) {
+        this.attitudes_count = attitudes_count;
+    }
+
+    public void setComments_count(int comments_count) {
+        this.comments_count = comments_count;
+    }
+
+    public void setReposts_count(int reposts_count) {
+        this.reposts_count = reposts_count;
+    }
+
+    public int getAttitudes_count() {
+        return attitudes_count;
+    }
+
+    public int getComments_count() {
+        return comments_count;
+    }
+
+    public int getReposts_count() {
+        return reposts_count;
+    }
+
 }

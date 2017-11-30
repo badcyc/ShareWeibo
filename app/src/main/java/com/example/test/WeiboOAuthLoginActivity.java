@@ -10,6 +10,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.test.Model.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -105,6 +107,7 @@ public class WeiboOAuthLoginActivity extends AppCompatActivity {
                     try {
                         JSONObject object = new JSONObject(responseData);
                         access_token = object.getString("access_token");
+                        Utils.access_token=access_token;
                         Log.d("access_token",access_token);
                     }catch (JSONException e){
                         Log.d("access_token","JSON ERROR");
