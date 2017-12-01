@@ -18,6 +18,7 @@ import com.example.test.Adapters.MessageAdapter;
 import com.example.test.Model.Message;
 import com.example.test.Model.User;
 import com.example.test.Model.Utils;
+import com.example.test.Presenter.FragmentsGetData.GetLists;
 import com.example.test.R;
 
 import org.json.JSONArray;
@@ -62,13 +63,6 @@ public class AllWeiboFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        handler=new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(android.os.Message message) {
-                adapter.notifyDataSetChanged();
-                return true;
-            }
-        });
     }
 
     @Override
@@ -90,7 +84,6 @@ public class AllWeiboFragment extends Fragment {
             lists=(ArrayList)getArguments().getSerializable(ARG_PARAM1);
         }*/
         View view=inflater.inflate(R.layout.fragment_weibo,null);
-        initDate();
         adapter=new MessageAdapter(lists,context);
         Log.d("adapter:","finish");
         RecyclerView recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view);
@@ -103,6 +96,12 @@ public class AllWeiboFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initDate();
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
@@ -110,113 +109,8 @@ public class AllWeiboFragment extends Fragment {
 
 
     private void initDate() {
-                    OkHttpClient httpClient = new OkHttpClient();
-                    String access_token=Utils.access_token;
-                    Log.d("access_send", access_token);
-                    HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getContentUrl).newBuilder();
-                    httpBuilder.addQueryParameter("access_token", access_token);
-                    httpBuilder.addQueryParameter("count", "10");
-                    Request request = new Request.Builder()
-                            .url(httpBuilder.build())
-                            .get()
-                            .build();
-                    Call call = httpClient.newCall(request);
-                    call.enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            if (response.isSuccessful()) {
-                                String responsedata = response.body().string();
-                                Log.d("responsedata", responsedata);
-                                try {
-                                    JSONObject jsonObject = new JSONObject(responsedata);
-                                    JSONArray jsonArray = jsonObject.getJSONArray("statuses");
-
-                                    for (int i = 0; i < 10; i++) {
-                                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                        String create_at = jsonObject1.getString("created_at");
-                                        Log.d("created_at", create_at);
-
-                                        // JSONObject jsonObject2=jsonArray.getJSONObject(5);
-                                        String content = jsonObject1.getString("text");
-                                        Log.d("content", content);
-
-                                        //JSONObject jsonObject3=jsonArray.getJSONObject(8);
-                                        String from_url = jsonObject1.getString("source");
-                                        Log.d("from_url", from_url);
-
-                                        JSONArray pic_urlsArray = jsonObject1.getJSONArray("pic_urls");
-                                        int k = pic_urlsArray.length();
-                                        ArrayList<String> pic_urls = new ArrayList<>();
-                                        for (int j = 0; j < k; j++) {
-                                            pic_urls.add(pic_urlsArray.getJSONObject(j).getString("thumbnail_pic"));
-                                        }
-                                        String reposts_count = jsonObject1.getString("reposts_count");
-                                        String comments_count = jsonObject1.getString("comments_count");
-                                        String attitudes_count = jsonObject1.getString("attitudes_count");
-
-                                        JSONObject user = jsonObject1.getJSONObject("user");
-                                        //JSONObject nameObject=userArray.getJSONObject(4);
-                                        String user_name = user.getString("name");
-                                        Log.d("user_name", user_name);
-
-                                        //JSONObject picObject=jsonArray.getJSONObject(37);
-                                        String avatar_hd = user.getString("avatar_hd");
-                                        Log.d("avatar_hd", avatar_hd);
-
-                                        JSONObject retweetedObject = jsonObject1.getJSONObject("retweeted_status");
-                                        Message retweetedMessage = null;
-                                        if (retweetedObject != null) {
-                                            String retweetedFrom_url = jsonObject1.getString("source");
-                                            String retweetedCreate_at = jsonObject1.getString("created_at");
-                                            String retweetContent = jsonObject1.getString("text");
-                                            JSONArray retweetedPic_urlsArray = jsonObject1.getJSONArray("pic_urls");
-                                            int retweetedLength = retweetedPic_urlsArray.length();
-                                            ArrayList<String> retweetedPic_urls = new ArrayList<>();
-                                            for (int j = 0; j < retweetedLength; j++) {
-                                                retweetedPic_urls.add(pic_urlsArray.getJSONObject(j).getString("thumbnail_pic"));
-                                            }
-                                            String retweetedReposts_count = jsonObject1.getString("reposts_count");
-                                            String retweetedComments_count = jsonObject1.getString("comments_count");
-                                            String retweetedAttitudes_count = jsonObject1.getString("attitudes_count");
-                                            JSONObject retweetedUserObject = jsonObject1.getJSONObject("user");
-                                            //JSONObject nameObject=userArray.getJSONObject(4);
-                                            String retweetedUser_name = user.getString("name");
-                                            Log.d("user_name", user_name);
-
-                                            //JSONObject picObject=jsonArray.getJSONObject(37);
-                                            String retweetedAvatar_hd = user.getString("avatar_hd");
-                                            Log.d("avatar_hd", avatar_hd);
-                                            User retweetedUser = new User();
-                                            retweetedUser.setAvatar_hd(retweetedAvatar_hd);
-                                            retweetedUser.setName(retweetedUser_name);
-                                            // retweetedUser.setCreated_at(retweetedCreate_at);
-                                            retweetedMessage = new Message(retweetedCreate_at, retweetContent, retweetedFrom_url, retweetedUser, reposts_count,
-                                                    retweetedComments_count, retweetedAttitudes_count, null);
-                                            retweetedMessage.setPic_urls(retweetedPic_urls);
-                                        }
-                                        User user1 = new User();
-                                        user1.setName(user_name);
-                                        user1.setAvatar_hd(avatar_hd);
-                                        Message message = new Message(create_at, content, from_url, user1, reposts_count,
-                                                comments_count, attitudes_count, retweetedMessage);
-                                        message.setPic_urls(pic_urls);
-                                        lists.add(message);
-                                    }
-                                    handler.sendEmptyMessage(1);
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    });
-
-            }
+        GetLists.getList(adapter);
+    }
 
 
 
@@ -229,5 +123,6 @@ public class AllWeiboFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
+
 
 }
