@@ -42,4 +42,8 @@ public class Utils {
         }
         return realTime[0]+"月"+alltime[2]+"日 "+alltime[3];
     }
+    public static String parseMessage(Message message){
+        int repostsCounts=message.getReposts_count();
+        return String.valueOf(repostsCounts);
+    }
 }

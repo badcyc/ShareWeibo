@@ -29,8 +29,9 @@ public class Message implements Serializable{
     private int comments_count;
     private int attitudes_count;
     private User user;
+    private Message retweeted_status=null;
     public Message(String created_at,String contentText,String source_url,User user,
-                   String reposts_count,String comments_count,String attitudes_count){
+                   String reposts_count,String comments_count,String attitudes_count,Message retweeted_status){
         this.contentText=contentText;
         this.created_at=created_at;
         this.source_url=source_url;
@@ -38,7 +39,17 @@ public class Message implements Serializable{
         this.reposts_count=Integer.valueOf(reposts_count);
         this.comments_count=Integer.valueOf(comments_count);
         this.attitudes_count=Integer.valueOf(attitudes_count);
+        this.retweeted_status=retweeted_status;
     }
+
+    public void setRetweeted_status(Message retweeted_status) {
+        this.retweeted_status = retweeted_status;
+    }
+
+    public Message getRetweeted_status() {
+        return retweeted_status;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
