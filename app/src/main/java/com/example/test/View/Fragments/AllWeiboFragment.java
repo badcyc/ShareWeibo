@@ -48,7 +48,14 @@ public class AllWeiboFragment extends Fragment {
     MessageAdapter adapter;
     private String mParam1;
     private String mParam2;
-    private Handler handler;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            adapter.notifyDataSetChanged();
+
+        }
+    };
+
     public AllWeiboFragment(){
 
     }
@@ -84,10 +91,12 @@ public class AllWeiboFragment extends Fragment {
             lists=(ArrayList)getArguments().getSerializable(ARG_PARAM1);
         }*/
         View view=inflater.inflate(R.layout.fragment_weibo,null);
+        initDate();
         adapter=new MessageAdapter(lists,context);
         Log.d("adapter:","finish");
         RecyclerView recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
+        //recyclerView.addItemDecoration(new RecyclerViewDivider);
         Log.d("recyclerView:","finish");
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
@@ -98,7 +107,6 @@ public class AllWeiboFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initDate();
     }
 
     @Override
@@ -109,7 +117,8 @@ public class AllWeiboFragment extends Fragment {
 
 
     private void initDate() {
-        GetLists.getList(adapter);
+        lists=GetLists.getList(handler);
+
     }
 
 

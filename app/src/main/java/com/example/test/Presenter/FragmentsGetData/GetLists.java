@@ -1,5 +1,6 @@
 package com.example.test.Presenter.FragmentsGetData;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.example.test.Adapters.MessageAdapter;
@@ -13,7 +14,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -22,19 +22,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.example.test.Model.Utils.access_token;
+
 /**
  * Created by cyc20 on 2017/12/1.
  */
 
 public class GetLists {
-    public static ArrayList<Message> getList(final MessageAdapter messageAdapter) {
+    public static ArrayList<Message> getList(final Handler handler) {
         final ArrayList<Message> messages=new ArrayList<>();
         OkHttpClient httpClient = new OkHttpClient();
-        String access_token = Utils.access_token;
+
         Log.d("access_send", access_token);
         HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getContentUrl).newBuilder();
         httpBuilder.addQueryParameter("access_token", access_token);
-        httpBuilder.addQueryParameter("count", "10");
+        httpBuilder.addQueryParameter("count", "20");
         Request request = new Request.Builder()
                 .url(httpBuilder.build())
                 .get()
@@ -87,36 +89,39 @@ public class GetLists {
                             String avatar_hd = user.getString("avatar_hd");
                             Log.d("avatar_hd", avatar_hd);
 
-                            JSONObject retweetedObject = jsonObject1.getJSONObject("retweeted_status");
-                            Message retweetedMessage = null;
-                            if (retweetedObject != null) {
-                                String retweetedFrom_url = jsonObject1.getString("source");
-                                String retweetedCreate_at = jsonObject1.getString("created_at");
-                                String retweetContent = jsonObject1.getString("text");
-                                JSONArray retweetedPic_urlsArray = jsonObject1.getJSONArray("pic_urls");
-                                int retweetedLength = retweetedPic_urlsArray.length();
-                                ArrayList<String> retweetedPic_urls = new ArrayList<>();
-                                for (int j = 0; j < retweetedLength; j++) {
-                                    retweetedPic_urls.add(pic_urlsArray.getJSONObject(j).getString("thumbnail_pic"));
-                                }
-                                String retweetedReposts_count = jsonObject1.getString("reposts_count");
-                                String retweetedComments_count = jsonObject1.getString("comments_count");
-                                String retweetedAttitudes_count = jsonObject1.getString("attitudes_count");
-                                JSONObject retweetedUserObject = jsonObject1.getJSONObject("user");
-                                //JSONObject nameObject=userArray.getJSONObject(4);
-                                String retweetedUser_name = user.getString("name");
-                                Log.d("user_name", user_name);
+                            Message retweetedMessage=null;
+                            if(!jsonObject1.isNull("retweeted_status")) {
+                                JSONObject retweetedObject = jsonObject1.getJSONObject("retweeted_status");
+                                retweetedMessage = null;
+                                if (retweetedObject != null) {
+                                    String retweetedFrom_url = jsonObject1.getString("source");
+                                    String retweetedCreate_at = jsonObject1.getString("created_at");
+                                    String retweetContent = jsonObject1.getString("text");
+                                    JSONArray retweetedPic_urlsArray = jsonObject1.getJSONArray("pic_urls");
+                                    int retweetedLength = retweetedPic_urlsArray.length();
+                                    ArrayList<String> retweetedPic_urls = new ArrayList<>();
+                                    for (int j = 0; j < retweetedLength; j++) {
+                                        retweetedPic_urls.add(pic_urlsArray.getJSONObject(j).getString("thumbnail_pic"));
+                                    }
+                                    String retweetedReposts_count = jsonObject1.getString("reposts_count");
+                                    String retweetedComments_count = jsonObject1.getString("comments_count");
+                                    String retweetedAttitudes_count = jsonObject1.getString("attitudes_count");
+                                    JSONObject retweetedUserObject = jsonObject1.getJSONObject("user");
+                                    //JSONObject nameObject=userArray.getJSONObject(4);
+                                    String retweetedUser_name = user.getString("name");
+                                    Log.d("user_name", user_name);
 
-                                //JSONObject picObject=jsonArray.getJSONObject(37);
-                                String retweetedAvatar_hd = user.getString("avatar_hd");
-                                Log.d("avatar_hd", avatar_hd);
-                                User retweetedUser = new User();
-                                retweetedUser.setAvatar_hd(retweetedAvatar_hd);
-                                retweetedUser.setName(retweetedUser_name);
-                                // retweetedUser.setCreated_at(retweetedCreate_at);
-                                retweetedMessage = new Message(retweetedCreate_at, retweetContent, retweetedFrom_url, retweetedUser, reposts_count,
-                                        retweetedComments_count, retweetedAttitudes_count, null);
-                                retweetedMessage.setPic_urls(retweetedPic_urls);
+                                    //JSONObject picObject=jsonArray.getJSONObject(37);
+                                    String retweetedAvatar_hd = user.getString("avatar_hd");
+                                    Log.d("avatar_hd", avatar_hd);
+                                    User retweetedUser = new User();
+                                    retweetedUser.setAvatar_hd(retweetedAvatar_hd);
+                                    retweetedUser.setName(retweetedUser_name);
+                                    // retweetedUser.setCreated_at(retweetedCreate_at);
+                                    retweetedMessage = new Message(retweetedCreate_at, retweetContent, retweetedFrom_url, retweetedUser, reposts_count,
+                                            retweetedComments_count, retweetedAttitudes_count, null);
+                                    retweetedMessage.setPic_urls(retweetedPic_urls);
+                                }
                             }
                             User user1 = new User();
                             user1.setName(user_name);
@@ -126,7 +131,8 @@ public class GetLists {
                             message.setPic_urls(pic_urls);
                             messages.add(message);
                         }
-                        messageAdapter.notifyDataSetChanged();
+                      // messageAdapter.notifyDataSetChanged();
+                        handler.sendEmptyMessage(1);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -136,5 +142,34 @@ public class GetLists {
         });
         return messages;
     }
+    public static void getUid() {
+        OkHttpClient httpClient = new OkHttpClient();
+        HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getUidUrl).newBuilder();
+        httpBuilder.addQueryParameter("access_token", access_token);
+        Request request = new Request.Builder()
+                .url(httpBuilder.build())
+                .get()
+                .build();
+        Call call = httpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
 
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responsedata = response.body().string();
+                    Log.d("responsedata", responsedata);
+                    try {
+                        JSONObject jsonObject = new JSONObject(responsedata);
+                        Utils.uid = jsonObject.getString("uid");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 }

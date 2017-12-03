@@ -4,8 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:orientation="horizontal">
+    android:padding="0dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pic_iv"
@@ -50,53 +57,61 @@
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <android.support.v7.widget.GridLayout
+            android:id="@+id/gridlayout_main"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:columnCount="3">
+            <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/image_view"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_margin="1dp"
+                android:scaleType="centerCrop"
+                app:layout_columnWeight="1"
+                />
+
+        </android.support.v7.widget.GridLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:layout_marginRight="0dp"
-                android:layout_marginLeft="0dp"
-                android:id="@+id/reposts_count"
+            android:layout_height="30dp">
+            <TextView
+                android:id="@+id/repost_count"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="30dp"
-                android:text="1"
-                android:clickable="true"
-                android:layout_gravity="left|center_horizontal"
-                android:drawableLeft="@drawable/ic_menu_share"
+
+                android:drawableLeft="@drawable/btn_repeat_normal_meitu_1"
+                android:gravity="center_horizontal|center_vertical"
+                android:drawablePadding="3dp"
                 />
-            <Button
-                android:layout_marginRight="0dp"
-                android:layout_marginLeft="0dp"
+            <TextView
                 android:id="@+id/comments_count"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:clickable="true"
-                android:layout_gravity="left|center_horizontal"
-                android:drawableLeft="@drawable/ic_menu_share"
+                android:drawableLeft="@drawable/btn_repeat_normal_meitu_1"
+                android:gravity="center_horizontal|center_vertical"
+                android:drawablePadding="3dp"
                 />
-            <Button
-                android:layout_marginRight="0dp"
-                android:layout_marginLeft="0dp"
+            <TextView
                 android:id="@+id/attitudes_count"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:clickable="true"
-                android:layout_gravity="left|center_horizontal"
-                android:drawableLeft="@drawable/ic_menu_share"
+                android:drawableLeft="@drawable/btn_repeat_normal_meitu_1"
+                android:gravity="center_horizontal|center_vertical"
+                android:drawablePadding="3dp"
                 />
-            <Button
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
-                android:id="@+id/more"
-                android:src="@drawable/ic_menu_share"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
-
+    </LinearLayout>
+<TextView
+    android:layout_margin="0dp"
+    android:padding="0dp"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/background_dark"/>
 </LinearLayout>

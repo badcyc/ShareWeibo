@@ -10,6 +10,11 @@ import java.util.regex.Pattern;
 public class Utils {
     public static String access_token="2.00Sx1GJGtmFCAD65dc4a9aa7rOmSdC";
     public static final String getContentUrl="https://api.weibo.com/2/statuses/home_timeline.json";
+    public static final String getUidUrl="https://api.weibo.com/2/account/get_uid.json";
+    public static String getPicUrl=null;
+    public static String getDescription=null;
+    public static String uid=null;
+    public static String userName=null;
     public static String getSource(final String source_url){
         String source=null;
         try {

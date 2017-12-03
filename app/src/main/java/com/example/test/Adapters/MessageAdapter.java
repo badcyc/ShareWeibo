@@ -3,12 +3,14 @@ package com.example.test.Adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.support.v7.widget.GridLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,9 +41,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         TextView time_tv;
         TextView from_tv;
         TextView content_tv;
-        Button reposts_count_btn;
-        Button attitudes_count_btn;
-        Button comments_count_btn;
+        TextView reposts_count_btn;
+        TextView attitudes_count_btn;
+        TextView comments_count_btn;
+        GridLayout gridLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             name_tv=(TextView)itemView.findViewById(R.id.name_tv);
@@ -49,9 +52,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             time_tv=(TextView)itemView.findViewById(R.id.time_tv);
             from_tv=(TextView)itemView.findViewById(R.id.from_tv);
             content_tv=(TextView)itemView.findViewById(R.id.content_tv);
-            reposts_count_btn=(Button)itemView.findViewById(R.id.reposts_count);
-            comments_count_btn=(Button)itemView.findViewById(R.id.comments_count);
-            attitudes_count_btn=(Button)itemView.findViewById(R.id.attitudes_count);
+            reposts_count_btn=(TextView) itemView.findViewById(R.id.repost_count);
+            comments_count_btn=(TextView) itemView.findViewById(R.id.comments_count);
+            attitudes_count_btn=(TextView) itemView.findViewById(R.id.attitudes_count);
+            gridLayout=(GridLayout)itemView.findViewById(R.id.gridlayout_main);
         }
     }
     public MessageAdapter(ArrayList<Message>messageArrayList, Context context){
@@ -92,11 +96,63 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.attitudes_count_btn.setText(String.valueOf(message.getAttitudes_count()));
             holder.comments_count_btn.setText(String.valueOf(message.getComments_count()));
             holder.reposts_count_btn.setText(String.valueOf(message.getReposts_count()));
+
+            holder.reposts_count_btn.setClickable(true);
+            holder.comments_count_btn.setClickable(true);
+            holder.attitudes_count_btn.setClickable(true);
+
+            if (message.getPic_urls().size()>0){
+                holder.gridLayout.setVisibility(View.VISIBLE);
+                updateViewGroup(message.getPic_urls(),holder.gridLayout);
+                Log.d("pics","load");
+            }
         }
     }
 
     @Override
     public int getItemCount() {
         return messageArrayList.size();
+    }
+
+    public void updateViewGroup(ArrayList<String> pic_urls, GridLayout gridlayout) {
+        gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
+        GridLayout.LayoutParams layoutParams;
+       if (pic_urls.size()==4||pic_urls.size()==2){
+            gridlayout.setColumnCount(2);
+           layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(400,400));
+        }else if (pic_urls.size()==1){
+            gridlayout.setColumnCount(1);
+           layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(600,400));
+        }
+        else {
+           gridlayout.setColumnCount(3);
+           layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(400,400));
+       }
+        int columnCount = gridlayout.getColumnCount();//得到列数
+
+        //遍历集合 动态添加
+        for (int i = 0, size = pic_urls.size(); i < size; i++) {
+
+            GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
+            GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
+
+            LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            ImageView imageView=(ImageView)inflater.inflate(R.layout.imageview,null);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+            Log.d("image.height",String.valueOf(imageView.getHeight()));
+            //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
+
+            layoutParams.rowSpec = rowSpec;
+            layoutParams.columnSpec = columnSpec;
+            //layoutParams.height=300;
+            //layoutParams.width=300;
+            //layoutParams.setMargins(marginSize, marginSize, marginSize, marginSize);
+            Glide.with(context)
+                    .load(pic_urls.get(i))
+                    .asBitmap().into(imageView);
+            Log.d("gridlayoutwidth",String.valueOf(gridlayout.getWidth()));
+            gridlayout.addView(imageView, layoutParams);
+        }
     }
 }

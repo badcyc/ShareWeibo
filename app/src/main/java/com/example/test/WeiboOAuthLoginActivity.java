@@ -23,6 +23,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.example.test.Presenter.FragmentsGetData.GetLists.getUid;
+
 /**
  * Created by cyc20 on 2017/11/28.
  */
@@ -75,6 +77,7 @@ public class WeiboOAuthLoginActivity extends AppCompatActivity {
                     if(url.contains("code")){
                         String code= Uri.parse(url).getQueryParameters("code").get(0);
                         getAccessToken(code);
+                        getUid();
                     }
                     return super.shouldOverrideUrlLoading(view, url);
                 }
