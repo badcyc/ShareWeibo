@@ -3,9 +3,11 @@ package com.example.test.Presenter.FragmentsGetData;
 import android.os.Handler;
 import android.util.Log;
 
-import com.example.test.Adapters.MessageAdapter;
+import com.example.test.Model.GetMessagesFromPhone;
 import com.example.test.Model.Message;
-import com.example.test.Model.User;
+import com.example.test.Model.SaveMessagesToPhone;
+import com.example.test.Model.User.ThisUser;
+import com.example.test.Model.User.User;
 import com.example.test.Model.Utils;
 
 import org.json.JSONArray;
@@ -29,14 +31,14 @@ import static com.example.test.Model.Utils.access_token;
  */
 
 public class GetLists {
-    public static ArrayList<Message> getList(final Handler handler) {
+    public static ArrayList<Message> getList(final Handler handler) {     //获取当前用户和关注用户最新微博
         final ArrayList<Message> messages=new ArrayList<>();
         OkHttpClient httpClient = new OkHttpClient();
 
         Log.d("access_send", access_token);
         HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getContentUrl).newBuilder();
         httpBuilder.addQueryParameter("access_token", access_token);
-        httpBuilder.addQueryParameter("count", "20");
+        httpBuilder.addQueryParameter("count", "20");          //数量20
         Request request = new Request.Builder()
                 .url(httpBuilder.build())
                 .get()
@@ -142,34 +144,81 @@ public class GetLists {
         });
         return messages;
     }
-    public static void getUid() {
-        OkHttpClient httpClient = new OkHttpClient();
-        HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getUidUrl).newBuilder();
-        httpBuilder.addQueryParameter("access_token", access_token);
-        Request request = new Request.Builder()
-                .url(httpBuilder.build())
-                .get()
-                .build();
-        Call call = httpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
+    public static String getUid(String access_token) {       //用得到的access_token获得当前用户的uid
+        String uid=null;
+        try {
+            OkHttpClient httpClient = new OkHttpClient();
+            HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getUidUrl).newBuilder();
+            httpBuilder.addQueryParameter("access_token", access_token);
+            Request request = new Request.Builder()
+                    .url(httpBuilder.build())
+                    .get()
+                    .build();
+            Response response = httpClient.newCall(request).execute();
+                        if (response.isSuccessful()) {
+                        String responsedata = response.body().string();
+                        Log.d("responsedata", responsedata);
+                        try {
+                            JSONObject jsonObject = new JSONObject(responsedata);
+                            uid = jsonObject.getString("uid");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return uid;
+    }
+    public static ThisUser getUserMessages(String uid,String access_token) {
+        ThisUser user = null;
+        if(GetMessagesFromPhone.getThisUserFormPhone(uid)!=null){          //检查本地是否有内容
+            user=GetMessagesFromPhone.getThisUserFormPhone(uid);
+            Log.d("loadfromphone","true");
+        }
+        else {
+            try {
+                OkHttpClient httpClient = new OkHttpClient();
+                HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getUserMessageUrl).newBuilder();
+                httpBuilder.addQueryParameter("access_token", access_token);
+                httpBuilder.addQueryParameter("uid", uid);
+                Request request = new Request.Builder()
+                        .url(httpBuilder.build())
+                        .get()
+                        .build();
+                Response response = httpClient.newCall(request).execute();
                 if (response.isSuccessful()) {
                     String responsedata = response.body().string();
                     Log.d("responsedata", responsedata);
                     try {
                         JSONObject jsonObject = new JSONObject(responsedata);
-                        Utils.uid = jsonObject.getString("uid");
+                        int mClass = jsonObject.getInt("class");
+                        String screen_name = jsonObject.getString("screen_name");
+                        int province = jsonObject.getInt("province");
+                        int city = jsonObject.getInt("city");
+                        String location = jsonObject.getString("location");
+                        String description = jsonObject.getString("description");
+                        String profile_image_url = jsonObject.getString("profile_image_url");
+                        String cover_image_phone = jsonObject.getString("cover_image_phone");
+                        int followers_count = jsonObject.getInt("followers_count");
+                        int friends_count = jsonObject.getInt("friends_count");
+                        int statuses_count = jsonObject.getInt("statuses_count");
+                        int favourites_count = jsonObject.getInt("favourites_count");
+                        String created_at = jsonObject.getString("created_at");
+                        user = new ThisUser(uid, profile_image_url, screen_name, mClass, province, city, location,
+                                description, cover_image_phone, followers_count, friends_count, statuses_count, favourites_count, created_at);
+
+
+                        SaveMessagesToPhone.SaveThisUsersMessagesToPhone(uid, jsonObject);//保存json信息到内存里
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
+        }
+        return user;
     }
 }

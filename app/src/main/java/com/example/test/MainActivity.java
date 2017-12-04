@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.test.Model.Utils;
 import com.example.test.View.Fragments.AllWeiboFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity
                     return true;
                 case R.id.navigation_notifications:
                     fragmentTransaction=fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content,new AllWeiboFragment());
+                    fragmentTransaction.replace(R.id.content,AllWeiboFragment.newInstance(Utils.AllWeiboFragmentArgs));
                     Log.d("fragment:","finish");
                     fragmentTransaction.addToBackStack(null).commit();
                     return true;

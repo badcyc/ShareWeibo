@@ -77,7 +77,7 @@ public class WeiboOAuthLoginActivity extends AppCompatActivity {
                     if(url.contains("code")){
                         String code= Uri.parse(url).getQueryParameters("code").get(0);
                         getAccessToken(code);
-                        getUid();
+
                     }
                     return super.shouldOverrideUrlLoading(view, url);
                 }
@@ -111,6 +111,8 @@ public class WeiboOAuthLoginActivity extends AppCompatActivity {
                         JSONObject object = new JSONObject(responseData);
                         access_token = object.getString("access_token");
                         Utils.access_token=access_token;
+                        Utils.uid=getUid(access_token);
+
                         Log.d("access_token",access_token);
                     }catch (JSONException e){
                         Log.d("access_token","JSON ERROR");
@@ -128,5 +130,6 @@ public class WeiboOAuthLoginActivity extends AppCompatActivity {
             }
         }).start();
     }
+
 
 }

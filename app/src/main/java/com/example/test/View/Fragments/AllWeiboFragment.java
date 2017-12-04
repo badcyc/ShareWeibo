@@ -16,24 +16,10 @@ import android.view.ViewGroup;
 
 import com.example.test.Adapters.MessageAdapter;
 import com.example.test.Model.Message;
-import com.example.test.Model.User;
-import com.example.test.Model.Utils;
 import com.example.test.Presenter.FragmentsGetData.GetLists;
 import com.example.test.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by cyc20 on 2017/11/29.
@@ -59,10 +45,10 @@ public class AllWeiboFragment extends Fragment {
     public AllWeiboFragment(){
 
     }
-    public static AllWeiboFragment newInstance(ArrayList<Message> lists) {
+    public static AllWeiboFragment newInstance(int arg) {
         AllWeiboFragment fragment = new AllWeiboFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_PARAM1,lists);
+        args.putSerializable(ARG_PARAM1,arg);
         fragment.setArguments(args);
         return fragment;
     }

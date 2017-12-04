@@ -1,5 +1,7 @@
 package com.example.test.Model;
 
+import com.example.test.Model.User.User;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
