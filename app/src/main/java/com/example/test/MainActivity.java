@@ -2,7 +2,6 @@ package com.example.test;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -26,6 +25,8 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.test.Model.Utils;
 import com.example.test.View.Fragments.AllWeiboFragment;
+import com.example.test.View.Fragments.PrivateMessagesFragment;
+import com.example.test.View.WeiboOAuthLoginActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,9 +47,13 @@ public class MainActivity extends AppCompatActivity
               //      mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_dashboard:
-                    Intent intent=new Intent(MainActivity.this,WeiboOAuthLoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                   // Intent intent=new Intent(MainActivity.this,WeiboOAuthLoginActivity.class);
+                    //startActivity(intent);
+                    //finish();
+                    fragmentTransaction=fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content,new PrivateMessagesFragment());
+                    Log.d("fragment:","finish");
+                    fragmentTransaction.addToBackStack(null).commit();
                     return true;
                 case R.id.navigation_notifications:
                     fragmentTransaction=fragmentManager.beginTransaction();

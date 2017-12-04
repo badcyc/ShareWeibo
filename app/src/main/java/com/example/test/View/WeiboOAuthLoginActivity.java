@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.View;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,7 +10,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.test.MainActivity;
 import com.example.test.Model.Utils;
+import com.example.test.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

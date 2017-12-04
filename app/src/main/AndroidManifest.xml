@@ -21,7 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WeiboOAuthLoginActivity">
+        <activity android:name=".View.WeiboOAuthLoginActivity">
+
+        </activity>
+        <activity android:name=".View.AddIdActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
     </application>
