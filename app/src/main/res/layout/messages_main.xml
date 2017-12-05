@@ -74,7 +74,41 @@
                 />
 
         </android.support.v7.widget.GridLayout>
-        <LinearLayout
+        <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/retweeted_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/retweeted_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/retweeted_message_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.GridLayout
+                android:id="@+id/retweeted_gridlayout_main"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:columnCount="3">
+                <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/retweeted_image_view"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="1dp"
+                    android:scaleType="centerCrop"
+                    app:layout_columnWeight="1"
+                    />
+
+            </android.support.v7.widget.GridLayout>
+
+
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp">
             <TextView
@@ -106,7 +140,7 @@
                 android:drawablePadding="3dp"
                 />
         </LinearLayout>
-    </LinearLayout>
+      </LinearLayout>
     </LinearLayout>
 <TextView
     android:layout_margin="0dp"
@@ -114,4 +148,5 @@
     android:layout_width="match_parent"
     android:layout_height="1dp"
     android:background="@android:color/background_dark"/>
+</LinearLayout>
 </LinearLayout>

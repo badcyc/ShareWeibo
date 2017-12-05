@@ -1,4 +1,4 @@
-package com.example.test.Model;
+package com.example.test.BaseModel;
 
 import android.util.Log;
 
@@ -13,7 +13,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import static com.example.test.Model.Utils.directory;
+import static com.example.test.View.AddIdActivity.directory;
+
 
 /**
  * Created by cyc20 on 2017/12/4.

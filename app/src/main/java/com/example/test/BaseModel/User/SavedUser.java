@@ -1,10 +1,11 @@
-package com.example.test.Model.User;
+package com.example.test.BaseModel.User;
 
 /**
  * Created by cyc20 on 2017/12/3.
+ * 保存在本地的登陆成功的用户信息
  */
 
-public class ThisUser {
+public class SavedUser {
     private String uid;
     private String userIdImageUrl;
     private String userIdScreenName;
@@ -21,11 +22,11 @@ public class ThisUser {
     private String created_at;
 
     private boolean selectedState;
-    public ThisUser(String uid,String userIdImageUrl,String userIdScreenName,
-                    int userIdClass,int userIdProvince, int userIdCity,
-                    String userLocation,String description,String cover_image_phoneUrl,
-                    int followers_count,int friends_count,int statuses_count,int favourite_count,
-                    String created_at){
+    public SavedUser(String uid, String userIdImageUrl, String userIdScreenName,
+                     int userIdClass, int userIdProvince, int userIdCity,
+                     String userLocation, String description, String cover_image_phoneUrl,
+                     int followers_count, int friends_count, int statuses_count, int favourite_count,
+                     String created_at){
         this.userIdImageUrl=userIdImageUrl;
         this.cover_image_phoneUrl=cover_image_phoneUrl;
         this.uid=uid;

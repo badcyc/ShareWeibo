@@ -1,15 +1,12 @@
-package com.example.test.Model;
+package com.example.test.BaseModel;
 
-import android.util.Xml;
-
-import com.example.test.Model.User.ThisUser;
+import com.example.test.BaseModel.User.SavedUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -18,8 +15,8 @@ import java.io.IOException;
  */
 
 public class GetMessagesFromPhone {
-    public static ThisUser getThisUserFormPhone(String uid){
-        ThisUser user=null;
+    public static SavedUser getThisUserFormPhone(String uid){
+        SavedUser user=null;
         File file=new File(Utils.directory,uid);
         if (file.exists()){
             try {
@@ -51,7 +48,7 @@ public class GetMessagesFromPhone {
                     int statuses_count = jsonObject.getInt("statuses_count");
                     int favourites_count = jsonObject.getInt("favourites_count");
                     String created_at = jsonObject.getString("created_at");
-                    user = new ThisUser(uid, profile_image_url, screen_name, mClass, province, city, location,
+                    user = new SavedUser(uid, profile_image_url, screen_name, mClass, province, city, location,
                             description, cover_image_phone, followers_count, friends_count, statuses_count, favourites_count, created_at);
                 }
                 catch (JSONException e){

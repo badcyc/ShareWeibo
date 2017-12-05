@@ -1,28 +1,25 @@
-package com.example.test.Adapters;
+package com.example.test.WeiboMessages.AllWeiboMessages.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.v7.widget.GridLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.Model.Message;
-import com.example.test.Model.Utils;
+import com.example.test.BaseModel.Message;
+import com.example.test.BaseModel.Utils;
 import com.example.test.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -45,6 +42,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         TextView attitudes_count_btn;
         TextView comments_count_btn;
         GridLayout gridLayout;
+        LinearLayout retweeted_content_main;
+        TextView retweeted_content_tv;
+        TextView retweeted_message_tv;
+        GridLayout retweeted_gridlayout;
+
         public ViewHolder(View itemView) {
             super(itemView);
             name_tv=(TextView)itemView.findViewById(R.id.name_tv);
@@ -56,6 +58,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             comments_count_btn=(TextView) itemView.findViewById(R.id.comments_count);
             attitudes_count_btn=(TextView) itemView.findViewById(R.id.attitudes_count);
             gridLayout=(GridLayout)itemView.findViewById(R.id.gridlayout_main);
+            retweeted_content_main=(LinearLayout)itemView.findViewById(R.id.retweeted_container);
+            retweeted_content_tv=(TextView)itemView.findViewById(R.id.retweeted_content_tv);
+            retweeted_message_tv=(TextView)itemView.findViewById(R.id.retweeted_message_tv);
+            retweeted_gridlayout=(GridLayout)itemView.findViewById(R.id.retweeted_gridlayout_main);
         }
     }
     public MessageAdapter(ArrayList<Message>messageArrayList, Context context){
@@ -105,6 +111,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 holder.gridLayout.setVisibility(View.VISIBLE);
                 updateViewGroup(message.getPic_urls(),holder.gridLayout);
                 Log.d("pics","load");
+            }
+            if (message.getRetweeted_status()!=null){
+                holder.retweeted_content_main.setVisibility(View.VISIBLE);
+                holder.retweeted_content_tv.setText(message.getRetweeted_status().getText());
+                holder.retweeted_message_tv.setText(message.getRetweeted_status().getAttitudes_count());
             }
         }
     }

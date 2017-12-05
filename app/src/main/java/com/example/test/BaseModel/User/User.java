@@ -1,9 +1,10 @@
-package com.example.test.Model.User;
+package com.example.test.BaseModel.User;
 
 import java.io.Serializable;
 
 /**
  * Created by cyc20 on 2017/11/29.
+ * 发微博里的用户信息
  */
 
 public class User implements Serializable{

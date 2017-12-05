@@ -1,6 +1,6 @@
-package com.example.test.Model;
+package com.example.test.BaseModel;
 
-import com.example.test.Model.User.User;
+import com.example.test.BaseModel.User.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;

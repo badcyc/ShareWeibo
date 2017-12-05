@@ -1,14 +1,14 @@
-package com.example.test.Presenter.FragmentsGetData;
+package com.example.test.WeiboMessages.FragmentsGetData;
 
 import android.os.Handler;
 import android.util.Log;
 
-import com.example.test.Model.GetMessagesFromPhone;
-import com.example.test.Model.Message;
-import com.example.test.Model.SaveMessagesToPhone;
-import com.example.test.Model.User.ThisUser;
-import com.example.test.Model.User.User;
-import com.example.test.Model.Utils;
+import com.example.test.BaseModel.GetMessagesFromPhone;
+import com.example.test.BaseModel.Message;
+import com.example.test.BaseModel.SaveMessagesToPhone;
+import com.example.test.BaseModel.User.SavedUser;
+import com.example.test.BaseModel.User.User;
+import com.example.test.BaseModel.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,21 +24,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.example.test.Model.Utils.access_token;
+import static com.example.test.BaseModel.Utils.access_token;
 
 /**
  * Created by cyc20 on 2017/12/1.
  */
 
 public class GetLists {
-    public static ArrayList<Message> getList(final Handler handler) {     //获取当前用户和关注用户最新微博
+    public static ArrayList<Message> getList(final Handler handler,String url) {     //获取当前用户和关注用户最新微博
         final ArrayList<Message> messages=new ArrayList<>();
         OkHttpClient httpClient = new OkHttpClient();
 
         Log.d("access_send", access_token);
-        HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getContentUrl).newBuilder();
+        HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder.addQueryParameter("access_token", access_token);
-        httpBuilder.addQueryParameter("count", "20");          //数量20
+        httpBuilder.addQueryParameter("count", "5");          //数量20
         Request request = new Request.Builder()
                 .url(httpBuilder.build())
                 .get()
@@ -170,8 +170,8 @@ public class GetLists {
         }
         return uid;
     }
-    public static ThisUser getUserMessages(String uid,String access_token) {
-        ThisUser user = null;
+    public static SavedUser getUserMessages(String uid, String access_token) {
+        SavedUser user = null;
         if(GetMessagesFromPhone.getThisUserFormPhone(uid)!=null){          //检查本地是否有内容
             user=GetMessagesFromPhone.getThisUserFormPhone(uid);
             Log.d("loadfromphone","true");
@@ -205,7 +205,7 @@ public class GetLists {
                         int statuses_count = jsonObject.getInt("statuses_count");
                         int favourites_count = jsonObject.getInt("favourites_count");
                         String created_at = jsonObject.getString("created_at");
-                        user = new ThisUser(uid, profile_image_url, screen_name, mClass, province, city, location,
+                        user = new SavedUser(uid, profile_image_url, screen_name, mClass, province, city, location,
                                 description, cover_image_phone, followers_count, friends_count, statuses_count, favourites_count, created_at);
 
 

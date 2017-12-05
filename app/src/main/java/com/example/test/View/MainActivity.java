@@ -1,6 +1,5 @@
-package com.example.test;
+package com.example.test.View;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,10 +22,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.Model.Utils;
-import com.example.test.View.Fragments.AllWeiboFragment;
+import com.example.test.BaseModel.Utils;
+import com.example.test.R;
+import com.example.test.WeiboMessages.AllWeiboMessages.View.AllWeiboFragment;
 import com.example.test.View.Fragments.PrivateMessagesFragment;
-import com.example.test.View.WeiboOAuthLoginActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

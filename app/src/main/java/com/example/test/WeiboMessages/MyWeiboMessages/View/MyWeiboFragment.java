@@ -1,12 +1,11 @@
-package com.example.test.View.Fragments;
+package com.example.test.WeiboMessages.MyWeiboMessages.View;
 
 import android.app.Activity;
-
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,22 +13,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.test.Adapters.MessageAdapter;
-import com.example.test.Model.Message;
-import com.example.test.Presenter.FragmentsGetData.GetLists;
+import com.example.test.WeiboMessages.AllWeiboMessages.Adapter.MessageAdapter;
+import com.example.test.BaseModel.Message;
+import com.example.test.WeiboMessages.FragmentsGetData.GetLists;
 import com.example.test.R;
 
 import java.util.ArrayList;
 
 /**
- * Created by cyc20 on 2017/11/29.
+ * Created by cyc20 on 2017/12/6.
  */
 
-public class AllWeiboFragment extends Fragment {
+public class MyWeiboFragment extends Fragment{
     private static final String ARG_PARAM1="param1";
     private int progress;
     private Context context=null;
-    public ArrayList<Message>lists=new ArrayList<>();
+    public ArrayList<Message> lists=new ArrayList<>();
     //public TaskAdapter adapter;
     MessageAdapter adapter;
     private String mParam1;
@@ -42,11 +41,11 @@ public class AllWeiboFragment extends Fragment {
         }
     };
 
-    public AllWeiboFragment(){
+    public MyWeiboFragment(){
 
     }
-    public static AllWeiboFragment newInstance(int arg) {
-        AllWeiboFragment fragment = new AllWeiboFragment();
+    public static MyWeiboFragment newInstance(int arg) {
+        MyWeiboFragment fragment = new MyWeiboFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1,arg);
         fragment.setArguments(args);
@@ -103,7 +102,7 @@ public class AllWeiboFragment extends Fragment {
 
 
     private void initDate() {
-        lists=GetLists.getList(handler);
+        lists= GetLists.getList(handler);
 
     }
 
@@ -118,6 +117,5 @@ public class AllWeiboFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
-
 
 }

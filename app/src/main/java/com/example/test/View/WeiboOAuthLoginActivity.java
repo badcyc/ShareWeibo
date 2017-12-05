@@ -10,8 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.example.test.MainActivity;
-import com.example.test.Model.Utils;
+import com.example.test.BaseModel.Utils;
 import com.example.test.R;
 
 import org.json.JSONException;
@@ -25,7 +24,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.test.Presenter.FragmentsGetData.GetLists.getUid;
+import static com.example.test.WeiboMessages.FragmentsGetData.GetLists.getUid;
 
 /**
  * Created by cyc20 on 2017/11/28.

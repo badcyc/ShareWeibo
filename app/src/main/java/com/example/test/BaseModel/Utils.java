@@ -1,6 +1,4 @@
-package com.example.test.Model;
-
-import com.example.test.Presenter.Data.MyApplication;
+package com.example.test.BaseModel;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,8 +12,7 @@ public class Utils {
     public static final String getContentUrl="https://api.weibo.com/2/statuses/home_timeline.json";
     public static final String getUidUrl="https://api.weibo.com/2/account/get_uid.json";
     public static final String getUserMessageUrl="https://api.weibo.com/2/users/show.json";
-    public static String directory= MyApplication.getContext().getExternalFilesDir(null).getAbsolutePath()+"//jsoncache//";
-
+    public static String directory;
 
 
     public static final int AllWeiboFragmentArgs=1;
