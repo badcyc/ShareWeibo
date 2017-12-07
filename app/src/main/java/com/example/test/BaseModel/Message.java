@@ -32,9 +32,10 @@ public class Message implements Serializable{
     private int attitudes_count;
     private User user;
     private Message retweeted_status=null;
-    public Message(String created_at,String contentText,String source_url,User user,
+    public Message(String created_at,String id,String contentText,String source_url,User user,
                    String reposts_count,String comments_count,String attitudes_count,Message retweeted_status){
         this.contentText=contentText;
+        this.id=id;
         this.created_at=created_at;
         this.source_url=source_url;
         this.user=user;

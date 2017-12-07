@@ -1,9 +1,7 @@
-package com.example.test.WeiboMessages.AllWeiboMessages.Adapter;
+package com.example.test.CommentsActivity.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,7 +17,6 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.test.BaseModel.Message;
 import com.example.test.BaseModel.Utils;
-import com.example.test.CommentsActivity.View.CommentsMainActivity;
 import com.example.test.R;
 
 import java.util.ArrayList;
@@ -31,10 +28,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by cyc20 on 2017/11/29.
  */
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
+public class ComentRepostAdapter extends RecyclerView.Adapter<ComentRepostAdapter.ViewHolder> {
 
-    private ArrayList messageArrayList=new ArrayList();
+    private ArrayList<String> messageArrayList=new ArrayList();
     private Context context;
+
+
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView name_tv;
         CircleImageView pic_iv;
@@ -67,7 +66,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             retweeted_gridlayout=(GridLayout)itemView.findViewById(R.id.retweeted_gridlayout_main);
         }
     }
-    public MessageAdapter(ArrayList<Message>messageArrayList, Context context){
+    public ComentRepostAdapter( Context context,ArrayList<String>messageArrayList){
         this.messageArrayList=messageArrayList;
         this.context=context;
     }
@@ -82,7 +81,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if (messageArrayList!=null) {
-            final Message message = (Message) messageArrayList.get(position);
+          /*  Message message = (Message) messageArrayList.get(position);
             Log.d("contentText_adapter:",message.getText());
             holder.content_tv.setText(message.getText());
             String source= Utils.getSource(message.getSource_url());
@@ -100,7 +99,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                             holder.pic_iv.setImageBitmap(resource);
                         }
                     });
-           // holder.pic_iv.setImageURI(Uri.parse(message.getPic_urls()));
+            // holder.pic_iv.setImageURI(Uri.parse(message.getPic_urls()));
             holder.name_tv.setText(message.getUser().getName());
             holder.attitudes_count_btn.setText(String.valueOf(message.getAttitudes_count()));
             holder.comments_count_btn.setText(String.valueOf(message.getComments_count()));
@@ -121,17 +120,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 holder.retweeted_message_tv.setText(message.getRetweeted_status().getAttitudes_count());
             }
 
-            holder.itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    Intent intent=new Intent(context, CommentsMainActivity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("message",message);
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                }
-            });
-        }
+        */}
+
     }
 
     @Override
@@ -142,17 +132,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void updateViewGroup(ArrayList<String> pic_urls, GridLayout gridlayout) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         GridLayout.LayoutParams layoutParams;
-       if (pic_urls.size()==4||pic_urls.size()==2){
+        if (pic_urls.size()==4||pic_urls.size()==2){
             gridlayout.setColumnCount(2);
-           layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(400,400));
+            layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(400,400));
         }else if (pic_urls.size()==1){
             gridlayout.setColumnCount(1);
-           layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(600,400));
+            layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(600,400));
         }
         else {
-           gridlayout.setColumnCount(3);
-           layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(400,400));
-       }
+            gridlayout.setColumnCount(3);
+            layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(400,400));
+        }
         int columnCount = gridlayout.getColumnCount();//得到列数
 
         //遍历集合 动态添加

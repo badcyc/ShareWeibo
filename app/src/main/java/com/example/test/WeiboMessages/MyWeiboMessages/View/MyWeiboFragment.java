@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.test.BaseModel.Utils;
 import com.example.test.WeiboMessages.AllWeiboMessages.Adapter.MessageAdapter;
 import com.example.test.BaseModel.Message;
 import com.example.test.WeiboMessages.FragmentsGetData.GetLists;
@@ -102,7 +103,7 @@ public class MyWeiboFragment extends Fragment{
 
 
     private void initDate() {
-        lists= GetLists.getList(handler);
+        lists= GetLists.getList(handler,Utils.getContentUrl);
 
     }
 
