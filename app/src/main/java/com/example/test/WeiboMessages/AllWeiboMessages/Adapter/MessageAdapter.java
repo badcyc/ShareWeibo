@@ -112,13 +112,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
             if (message.getPic_urls().size()>0){
                 holder.gridLayout.setVisibility(View.VISIBLE);
-                updateViewGroup(message.getPic_urls(),holder.gridLayout);
+                updateViewGroup(message.getPic_urls(),holder.gridLayout,context);
                 Log.d("pics","load");
             }
             if (message.getRetweeted_status()!=null){
                 holder.retweeted_content_main.setVisibility(View.VISIBLE);
                 holder.retweeted_content_tv.setText(message.getRetweeted_status().getText());
-                holder.retweeted_message_tv.setText(message.getRetweeted_status().getAttitudes_count());
+//                holder.retweeted_message_tv.setText(message.getRetweeted_status().getAttitudes_count());
             }
 
             holder.itemView.setOnClickListener(new View.OnClickListener(){
@@ -139,7 +139,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return messageArrayList.size();
     }
 
-    public void updateViewGroup(ArrayList<String> pic_urls, GridLayout gridlayout) {
+    public static void updateViewGroup(ArrayList<String> pic_urls, GridLayout gridlayout,Context context) {
         gridlayout.removeAllViews();//清空子视图 防止原有的子视图影响
         GridLayout.LayoutParams layoutParams;
        if (pic_urls.size()==4||pic_urls.size()==2){

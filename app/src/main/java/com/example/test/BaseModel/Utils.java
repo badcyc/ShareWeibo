@@ -12,6 +12,7 @@ public class Utils {
     public static final String getContentUrl="https://api.weibo.com/2/statuses/home_timeline.json";
     public static final String getUidUrl="https://api.weibo.com/2/account/get_uid.json";
     public static final String getUserMessageUrl="https://api.weibo.com/2/users/show.json";
+    public static final String getCommentsDataUrl="https://api.weibo.com/2/comments/show.json";
     public static String directory;
 
 

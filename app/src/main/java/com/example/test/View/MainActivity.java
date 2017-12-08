@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity
               //      mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_dashboard:
-                   // Intent intent=new Intent(MainActivity.this,WeiboOAuthLoginActivity.class);
-                    //startActivity(intent);
-                    //finish();
                     fragmentTransaction=fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.content,new PrivateMessagesFragment());
                     Log.d("fragment:","finish");
@@ -56,7 +53,7 @@ public class MainActivity extends AppCompatActivity
                     return true;
                 case R.id.navigation_notifications:
                     fragmentTransaction=fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content,AllWeiboFragment.newInstance(Utils.AllWeiboFragmentArgs));
+                    fragmentTransaction.replace(R.id.content,new AllWeiboFragment());
                     Log.d("fragment:","finish");
                     fragmentTransaction.addToBackStack(null).commit();
                     return true;

@@ -142,11 +142,12 @@
         </LinearLayout>
       </LinearLayout>
     </LinearLayout>
-<TextView
+
+</LinearLayout>
+    <TextView
     android:layout_margin="0dp"
     android:padding="0dp"
     android:layout_width="match_parent"
     android:layout_height="1dp"
     android:background="@android:color/background_dark"/>
-</LinearLayout>
 </LinearLayout>

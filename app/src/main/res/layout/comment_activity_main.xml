@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/comment_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:theme="@style/ToolbarTheme"
@@ -13,7 +13,7 @@
         <!--app:layout_scrollFlags="scroll|enterAlways"-->
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
+            android:id="@+id/comment_collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
@@ -39,7 +39,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/pic_iv"
+                            android:id="@+id/comment_pic_iv"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             app:civ_border_width="2dp"
@@ -52,7 +52,7 @@
                             android:layout_marginLeft="5dp"
                             android:orientation="vertical">
                             <TextView
-                                android:id="@+id/name_tv"
+                                android:id="@+id/comment_name_tv"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="20dp" />
@@ -61,7 +61,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <TextView
-                                    android:id="@+id/time_tv"
+                                    android:id="@+id/comment_time_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="10sp"/>
@@ -71,25 +71,25 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                                 <TextView
-                                    android:id="@+id/from_tv"
+                                    android:id="@+id/comment_from_tv"
                                     android:textSize="10sp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
                             <TextView
-                                android:id="@+id/content_tv"
+                                android:id="@+id/comment_content_tv"
                                 android:textSize="20sp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
                             <android.support.v7.widget.GridLayout
-                                android:id="@+id/gridlayout_main"
+                                android:id="@+id/comment_gridlayout_main"
                                 android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:columnCount="3">
                                 <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                                     xmlns:android="http://schemas.android.com/apk/res/android"
-                                    android:id="@+id/image_view"
+                                    android:id="@+id/comment_image_view"
                                     android:layout_width="0dp"
                                     android:layout_height="100dp"
                                     android:layout_margin="1dp"
@@ -100,28 +100,28 @@
                             </android.support.v7.widget.GridLayout>
                             <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                                 xmlns:android="http://schemas.android.com/apk/res/android"
-                                android:id="@+id/retweeted_container"
+                                android:id="@+id/comment_retweeted_container"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
                                 >
                                 <TextView
-                                    android:id="@+id/retweeted_content_tv"
+                                    android:id="@+id/comment_retweeted_content_tv"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content" />
                                 <TextView
-                                    android:id="@+id/retweeted_message_tv"
+                                    android:id="@+id/comment_retweeted_message_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                                 <android.support.v7.widget.GridLayout
-                                    android:id="@+id/retweeted_gridlayout_main"
+                                    android:id="@+id/comment_retweeted_gridlayout_main"
                                     android:visibility="gone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     app:columnCount="3">
                                     <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                                         xmlns:android="http://schemas.android.com/apk/res/android"
-                                        android:id="@+id/retweeted_image_view"
+                                        android:id="@+id/comment_retweeted_image_view"
                                         android:layout_width="0dp"
                                         android:layout_height="100dp"
                                         android:layout_margin="1dp"
@@ -139,7 +139,7 @@
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/comment_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:titleTextColor="#ffffff"
@@ -154,7 +154,7 @@
 
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
+            android:id="@+id/comment_tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_list_item"
@@ -166,7 +166,7 @@
 
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+        android:id="@+id/comment_viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

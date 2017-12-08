@@ -103,7 +103,7 @@ public class AllWeiboFragment extends Fragment {
     }
 
 
-    private void initDate() {
+    private synchronized void initDate() {
         lists=GetLists.getList(handler, Utils.getContentUrl);
 
     }

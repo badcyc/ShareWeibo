@@ -11,8 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.test.BaseModel.Utils;
 import com.example.test.CommentsActivity.Adapter.ComentRepostAdapter;
 import com.example.test.CommentsActivity.Adapter.CommentsTabPagerAdapter;
+import com.example.test.CommentsActivity.Model.CommentData;
+import com.example.test.CommentsActivity.Presenter.GetData;
 import com.example.test.R;
 
 import java.util.ArrayList;
@@ -25,14 +28,17 @@ import java.util.List;
 public class ForwardedFragment extends Fragment {
 
 
+    private String id;
+    private ArrayList<CommentData> dataList=new ArrayList<>();
     RecyclerView mRecyclerView;
     private Context context;
     private int mPage;
     public static final String MERCHANT_DETAILS_PAGE = "MERCHANT_DETAILS_PAGE";
     private ComentRepostAdapter mAdapter;
-    public static ForwardedFragment newInstance(int page){
+    public static ForwardedFragment newInstance(int page,String id){
         Bundle args=new Bundle();
         args.putInt(MERCHANT_DETAILS_PAGE,page);
+        args.putString("id",id);
         ForwardedFragment fragment=new ForwardedFragment();
         fragment.setArguments(args);
         return fragment;
@@ -42,6 +48,7 @@ public class ForwardedFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage=getArguments().getInt(MERCHANT_DETAILS_PAGE);
+        id=getArguments().getString("id");
         context=getActivity().getApplicationContext();
 
     }
@@ -49,24 +56,30 @@ public class ForwardedFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.comment_activity_main,container,false);
+        View view=inflater.inflate(R.layout.forwardedfragment_main,container,false);
         mRecyclerView=(RecyclerView)view.findViewById(R.id.mrecyclerview);
         switch (mPage){
             case 0:
-
+                initDate();
+                initAdapter(dataList);
                 break;
             case 1:
-
+                initDate();
+                initAdapter(dataList);
                 break;
             case 2:
-
+                initDate();
+                initAdapter(dataList);
                 break;
 
         }
         return view;
 
     }
-    private void initAdapter(ArrayList<String> data) {
+    private synchronized void initDate(){
+        dataList= GetData.getCommentRepostData(Utils.getCommentsDataUrl,id);
+    }
+    private void initAdapter(ArrayList<CommentData> data) {
         //mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new ComentRepostAdapter(getActivity(),data);

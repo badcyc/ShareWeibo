@@ -22,7 +22,7 @@ public class CommentsTabPagerAdapter  extends FragmentPagerAdapter{
     private TabPagerListener listener;
     List<String> list=new ArrayList<>();
     public interface TabPagerListener{
-        Fragment getFragment(int position);
+        Fragment getFragment(int position,String id);
     }
 
     public void setListener(TabPagerListener listener){
@@ -38,7 +38,7 @@ public class CommentsTabPagerAdapter  extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return listener.getFragment(position);
+        return listener.getFragment(position,message.getId());
     }
 
     @Override

@@ -59,7 +59,7 @@ public class GetLists {
                         JSONObject jsonObject = new JSONObject(responsedata);
                         JSONArray jsonArray = jsonObject.getJSONArray("statuses");
 
-                        for (int i = 0; i < 10; i++) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             String create_at = jsonObject1.getString("created_at");
                             Log.d("created_at", create_at);
