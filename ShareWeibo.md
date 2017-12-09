@@ -116,3 +116,10 @@
 
 添加CommentActivity
 
+#### 12月9日
+
+学习到的东西：
+
+- butterKnife
+- 格式化格式
+
