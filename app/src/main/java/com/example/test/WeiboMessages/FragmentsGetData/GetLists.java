@@ -31,8 +31,8 @@ import static com.example.test.BaseModel.Utils.access_token;
  */
 
 public class GetLists {
-    public static ArrayList<Message> getList(final Handler handler,String url) {     //获取当前用户和关注用户最新微博
-        final ArrayList<Message> messages=new ArrayList<>();
+    public static ArrayList<Message> getList(final Handler handler, String url) {     //获取当前用户和关注用户最新微博
+        final ArrayList<Message> messages = new ArrayList<>();
         OkHttpClient httpClient = new OkHttpClient();
 
         Log.d("access_send", access_token);
@@ -64,8 +64,8 @@ public class GetLists {
                             String create_at = jsonObject1.getString("created_at");
                             Log.d("created_at", create_at);
 
-                            String id=jsonObject1.getString("id");
-                            Log.d("id",id);
+                            String id = jsonObject1.getString("id");
+                            Log.d("id", id);
                             // JSONObject jsonObject2=jsonArray.getJSONObject(5);
                             String content = jsonObject1.getString("text");
                             Log.d("content", content);
@@ -93,14 +93,14 @@ public class GetLists {
                             String avatar_hd = user.getString("avatar_hd");
                             Log.d("avatar_hd", avatar_hd);
 
-                            Message retweetedMessage=null;
-                            if(!jsonObject1.isNull("retweeted_status")) {
+                            Message retweetedMessage = null;
+                            if (!jsonObject1.isNull("retweeted_status")) {
                                 JSONObject retweetedObject = jsonObject1.getJSONObject("retweeted_status");
                                 retweetedMessage = null;
                                 if (retweetedObject != null) {
                                     String retweetedFrom_url = jsonObject1.getString("source");
                                     String retweetedCreate_at = jsonObject1.getString("created_at");
-                                    String retweetedId=jsonObject1.getString("id");
+                                    String retweetedId = jsonObject1.getString("id");
                                     String retweetContent = jsonObject1.getString("text");
                                     JSONArray retweetedPic_urlsArray = jsonObject1.getJSONArray("pic_urls");
                                     int retweetedLength = retweetedPic_urlsArray.length();
@@ -123,7 +123,7 @@ public class GetLists {
                                     retweetedUser.setAvatar_hd(retweetedAvatar_hd);
                                     retweetedUser.setName(retweetedUser_name);
                                     // retweetedUser.setCreated_at(retweetedCreate_at);
-                                    retweetedMessage = new Message(retweetedCreate_at,retweetedId, retweetContent, retweetedFrom_url, retweetedUser, reposts_count,
+                                    retweetedMessage = new Message(retweetedCreate_at, retweetedId, retweetContent, retweetedFrom_url, retweetedUser, reposts_count,
                                             retweetedComments_count, retweetedAttitudes_count, null);
                                     retweetedMessage.setPic_urls(retweetedPic_urls);
                                 }
@@ -131,12 +131,12 @@ public class GetLists {
                             User user1 = new User();
                             user1.setName(user_name);
                             user1.setAvatar_hd(avatar_hd);
-                            Message message = new Message(create_at, content, from_url,id, user1, reposts_count,
+                            Message message = new Message(create_at, content, from_url, id, user1, reposts_count,
                                     comments_count, attitudes_count, retweetedMessage);
                             message.setPic_urls(pic_urls);
                             messages.add(message);
                         }
-                      // messageAdapter.notifyDataSetChanged();
+                        // messageAdapter.notifyDataSetChanged();
                         handler.sendEmptyMessage(1);
 
                     } catch (JSONException e) {
@@ -147,8 +147,9 @@ public class GetLists {
         });
         return messages;
     }
+
     public static String getUid(String access_token) {       //用得到的access_token获得当前用户的uid
-        String uid=null;
+        String uid = null;
         try {
             OkHttpClient httpClient = new OkHttpClient();
             HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getUidUrl).newBuilder();
@@ -158,28 +159,28 @@ public class GetLists {
                     .get()
                     .build();
             Response response = httpClient.newCall(request).execute();
-                        if (response.isSuccessful()) {
-                        String responsedata = response.body().string();
-                        Log.d("responsedata", responsedata);
-                        try {
-                            JSONObject jsonObject = new JSONObject(responsedata);
-                            uid = jsonObject.getString("uid");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-        }catch (IOException e){
+            if (response.isSuccessful()) {
+                String responsedata = response.body().string();
+                Log.d("responsedata", responsedata);
+                try {
+                    JSONObject jsonObject = new JSONObject(responsedata);
+                    uid = jsonObject.getString("uid");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return uid;
     }
+
     public static SavedUser getUserMessages(String uid, String access_token) {
         SavedUser user = null;
-        if(GetMessagesFromPhone.getThisUserFormPhone(uid)!=null){          //检查本地是否有内容
-            user=GetMessagesFromPhone.getThisUserFormPhone(uid);
-            Log.d("loadfromphone","true");
-        }
-        else {
+        if (GetMessagesFromPhone.getThisUserFormPhone(uid) != null) {          //检查本地是否有内容
+            user = GetMessagesFromPhone.getThisUserFormPhone(uid);
+            Log.d("loadfromphone", "true");
+        } else {
             try {
                 OkHttpClient httpClient = new OkHttpClient();
                 HttpUrl.Builder httpBuilder = HttpUrl.parse(Utils.getUserMessageUrl).newBuilder();

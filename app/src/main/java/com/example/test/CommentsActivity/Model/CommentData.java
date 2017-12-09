@@ -12,12 +12,13 @@ public class CommentData implements Serializable {
     private String content;
     private String source_url;
     private CommentUser user;
-    public CommentData(String created_at,String floor_name,String content,String source_url,CommentUser user){
-        this.content=content;
-        this.created_at=created_at;
-        this.floor_number=Integer.valueOf(floor_name);
-        this.source_url=source_url;
-        this.user=user;
+
+    public CommentData(String created_at, String floor_name, String content, String source_url, CommentUser user) {
+        this.content = content;
+        this.created_at = created_at;
+        this.floor_number = Integer.valueOf(floor_name);
+        this.source_url = source_url;
+        this.user = user;
     }
 
     public void setCreated_at(String created_at) {

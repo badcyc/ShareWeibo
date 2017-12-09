@@ -10,10 +10,11 @@ public class CommentUser implements Serializable {
     private String id;
     private String name;
     private String avatar_hd;
-    public CommentUser(String id,String name,String avatar_hd){
-        this.avatar_hd=avatar_hd;
-        this.id=id;
-        this.name=name;
+
+    public CommentUser(String id, String name, String avatar_hd) {
+        this.avatar_hd = avatar_hd;
+        this.id = id;
+        this.name = name;
     }
 
     public void setAvatar_hd(String avatar_hd) {

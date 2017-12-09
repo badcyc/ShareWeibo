@@ -18,10 +18,11 @@ import com.example.test.View.AddIdActivity;
  * Created by cyc20 on 2017/12/4.
  */
 
-public class PrivateMessagesFragment extends Fragment{
+public class PrivateMessagesFragment extends Fragment {
     private Context context;
     private Button button;
-    public PrivateMessagesFragment(){
+
+    public PrivateMessagesFragment() {
 
     }
 
@@ -33,7 +34,7 @@ public class PrivateMessagesFragment extends Fragment{
 
     @Override
     public void onAttach(Context context) {
-        this.context=context;
+        this.context = context;
 
         super.onAttach(context);
 
@@ -49,8 +50,8 @@ public class PrivateMessagesFragment extends Fragment{
         if(savedInstanceState!=null){
             lists=(ArrayList)getArguments().getSerializable(ARG_PARAM1);
         }*/
-        View view=inflater.inflate(R.layout.privatemessages_fragment,null);
-        button=(Button)view.findViewById(R.id.start_addidactivity);
+        View view = inflater.inflate(R.layout.privatemessages_fragment, null);
+        button = (Button) view.findViewById(R.id.start_addidactivity);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

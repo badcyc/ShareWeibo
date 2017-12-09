@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 发微博里的用户信息
  */
 
-public class User implements Serializable{
+public class User implements Serializable {
     private String id;
     private String idstr;
     private int classes;
@@ -36,31 +36,31 @@ public class User implements Serializable{
     private boolean verified;
     private int verified_type;
     private String remark;
-    private int  ptype;
-    private boolean  allow_all_comment;
-    private String  avatar_large;
-    private String  avatar_hd;  //头像
-    private String  verified_reason;
-    private String  verified_trade;
-    private String  verified_reason_url;
-    private String  verified_source;
-    private String  verified_source_url;
-    private boolean  follow_me;
-    private boolean  like;
-    private boolean  like_me;
-    private String  online_status;
-    private String  bi_followers_count;
-    private String  lang;
-    private int  star;
-    private int  mbtype;
-    private int  mbrank;
-    private int  block_word;
-    private int  block_app;
-    private int  credit_score;
-    private int  user_ability;
-    private int  urank;
-    private int  story_read_state;
-    private int  vclub_member;
+    private int ptype;
+    private boolean allow_all_comment;
+    private String avatar_large;
+    private String avatar_hd;  //头像
+    private String verified_reason;
+    private String verified_trade;
+    private String verified_reason_url;
+    private String verified_source;
+    private String verified_source_url;
+    private boolean follow_me;
+    private boolean like;
+    private boolean like_me;
+    private String online_status;
+    private String bi_followers_count;
+    private String lang;
+    private int star;
+    private int mbtype;
+    private int mbrank;
+    private int block_word;
+    private int block_app;
+    private int credit_score;
+    private int user_ability;
+    private int urank;
+    private int story_read_state;
+    private int vclub_member;
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;

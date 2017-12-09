@@ -3,7 +3,6 @@ package com.example.test.BaseModel;
 import android.util.Log;
 
 
-
 import org.json.JSONObject;
 
 import java.io.File;
@@ -22,27 +21,26 @@ import static com.example.test.View.AddIdActivity.directory;
 
 public class SaveMessagesToPhone {
 
-    public static void SaveThisUsersMessagesToPhone(String uid,JSONObject jsonObject){
+    public static void SaveThisUsersMessagesToPhone(String uid, JSONObject jsonObject) {
 
-        String fileName=uid;
-        File myPath=new File(directory,fileName);
-        if (myPath.exists()){
+        String fileName = uid;
+        File myPath = new File(directory, fileName);
+        if (myPath.exists()) {
             myPath.mkdir();
-        }
-        else {
+        } else {
             myPath.getParentFile().mkdirs();
             try {
                 myPath.createNewFile();
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
-                Log.d("createFile","ERROR");
+                Log.d("createFile", "ERROR");
             }
         }
         try {
-            OutputStream out=new FileOutputStream(myPath);
-            Writer writer=new OutputStreamWriter(out);
+            OutputStream out = new FileOutputStream(myPath);
+            Writer writer = new OutputStreamWriter(out);
             writer.write(jsonObject.toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

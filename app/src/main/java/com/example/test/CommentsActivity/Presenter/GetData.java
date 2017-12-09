@@ -29,8 +29,8 @@ import static com.example.test.BaseModel.Utils.access_token;
  */
 
 public class GetData {
-    public static synchronized ArrayList<CommentData> getCommentRepostData(String url,String id){
-        final ArrayList<CommentData> messages=new ArrayList<>();
+    public static synchronized ArrayList<CommentData> getCommentRepostData(String url, String id) {
+        final ArrayList<CommentData> messages = new ArrayList<>();
         OkHttpClient httpClient = new OkHttpClient();
 
         Log.d("access_send", access_token);
@@ -62,12 +62,12 @@ public class GetData {
                             String create_at = jsonObject1.getString("created_at");
                             Log.d("created_at", create_at);
 
-                            String id=jsonObject1.getString("id");
-                            Log.d("id",id);
+                            String id = jsonObject1.getString("id");
+                            Log.d("id", id);
 
 
-                            String floor_number=jsonObject1.getString("floor_number");
-                            Log.d("floor_number",floor_number);
+                            String floor_number = jsonObject1.getString("floor_number");
+                            Log.d("floor_number", floor_number);
                             String content = jsonObject1.getString("text");
                             Log.d("content", content);
 
@@ -77,7 +77,7 @@ public class GetData {
 
                             JSONObject user = jsonObject1.getJSONObject("user");
 
-                            String user_id=user.getString("id");
+                            String user_id = user.getString("id");
                             String user_name = user.getString("name");
                             Log.d("user_name", user_name);
 
@@ -87,12 +87,12 @@ public class GetData {
                             User user1 = new User();
                             user1.setName(user_name);
                             user1.setAvatar_hd(avatar_hd);
-                            CommentUser user2=new CommentUser(user_id,user_name,avatar_hd);
-                            CommentData data=new CommentData(create_at,floor_number,content,from_url,user2);
+                            CommentUser user2 = new CommentUser(user_id, user_name, avatar_hd);
+                            CommentData data = new CommentData(create_at, floor_number, content, from_url, user2);
                             messages.add(data);
                         }
                         // messageAdapter.notifyDataSetChanged();
-                       // handler.sendEmptyMessage(1);
+                        // handler.sendEmptyMessage(1);
 
                     } catch (JSONException e) {
                         e.printStackTrace();

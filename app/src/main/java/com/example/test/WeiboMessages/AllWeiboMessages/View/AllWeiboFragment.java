@@ -27,15 +27,15 @@ import java.util.ArrayList;
  */
 
 public class AllWeiboFragment extends Fragment {
-    private static final String ARG_PARAM1="param1";
+    private static final String ARG_PARAM1 = "param1";
     private int progress;
-    private Context context=null;
-    public ArrayList<Message>lists=new ArrayList<>();
+    private Context context = null;
+    public ArrayList<Message> lists = new ArrayList<>();
     //public TaskAdapter adapter;
     MessageAdapter adapter;
     private String mParam1;
     private String mParam2;
-    private Handler handler=new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {
             adapter.notifyDataSetChanged();
@@ -43,16 +43,18 @@ public class AllWeiboFragment extends Fragment {
         }
     };
 
-    public AllWeiboFragment(){
+    public AllWeiboFragment() {
 
     }
+
     public static AllWeiboFragment newInstance(int arg) {
         AllWeiboFragment fragment = new AllWeiboFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_PARAM1,arg);
+        args.putSerializable(ARG_PARAM1, arg);
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +63,7 @@ public class AllWeiboFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        this.context=context;
+        this.context = context;
 
         super.onAttach(context);
 
@@ -77,16 +79,16 @@ public class AllWeiboFragment extends Fragment {
         if(savedInstanceState!=null){
             lists=(ArrayList)getArguments().getSerializable(ARG_PARAM1);
         }*/
-        View view=inflater.inflate(R.layout.fragment_weibo,null);
+        View view = inflater.inflate(R.layout.fragment_weibo, null);
         initDate();
-        adapter=new MessageAdapter(lists,context);
-        Log.d("adapter:","finish");
-        RecyclerView recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view);
+        adapter = new MessageAdapter(lists, context);
+        Log.d("adapter:", "finish");
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
         //recyclerView.addItemDecoration(new RecyclerViewDivider);
-        Log.d("recyclerView:","finish");
+        Log.d("recyclerView:", "finish");
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(inflater.getContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         return view;
     }
@@ -104,10 +106,9 @@ public class AllWeiboFragment extends Fragment {
 
 
     private synchronized void initDate() {
-        lists=GetLists.getList(handler, Utils.getContentUrl);
+        lists = GetLists.getList(handler, Utils.getContentUrl);
 
     }
-
 
 
     @Override

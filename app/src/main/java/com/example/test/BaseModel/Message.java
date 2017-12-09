@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by cyc20 on 2017/11/28.
  */
 
-public class Message implements Serializable{
+public class Message implements Serializable {
     private String created_at;
     private String id;
     private String mid;
@@ -31,18 +31,19 @@ public class Message implements Serializable{
     private int comments_count;
     private int attitudes_count;
     private User user;
-    private Message retweeted_status=null;
-    public Message(String created_at,String id,String contentText,String source_url,User user,
-                   String reposts_count,String comments_count,String attitudes_count,Message retweeted_status){
-        this.contentText=contentText;
-        this.id=id;
-        this.created_at=created_at;
-        this.source_url=source_url;
-        this.user=user;
-        this.reposts_count=Integer.valueOf(reposts_count);
-        this.comments_count=Integer.valueOf(comments_count);
-        this.attitudes_count=Integer.valueOf(attitudes_count);
-        this.retweeted_status=retweeted_status;
+    private Message retweeted_status = null;
+
+    public Message(String created_at, String id, String contentText, String source_url, User user,
+                   String reposts_count, String comments_count, String attitudes_count, Message retweeted_status) {
+        this.contentText = contentText;
+        this.id = id;
+        this.created_at = created_at;
+        this.source_url = source_url;
+        this.user = user;
+        this.reposts_count = Integer.valueOf(reposts_count);
+        this.comments_count = Integer.valueOf(comments_count);
+        this.attitudes_count = Integer.valueOf(attitudes_count);
+        this.retweeted_status = retweeted_status;
     }
 
     public void setRetweeted_status(Message retweeted_status) {

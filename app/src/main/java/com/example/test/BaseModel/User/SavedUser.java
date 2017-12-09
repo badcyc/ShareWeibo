@@ -22,25 +22,26 @@ public class SavedUser {
     private String created_at;
 
     private boolean selectedState;
+
     public SavedUser(String uid, String userIdImageUrl, String userIdScreenName,
                      int userIdClass, int userIdProvince, int userIdCity,
                      String userLocation, String description, String cover_image_phoneUrl,
                      int followers_count, int friends_count, int statuses_count, int favourite_count,
-                     String created_at){
-        this.userIdImageUrl=userIdImageUrl;
-        this.cover_image_phoneUrl=cover_image_phoneUrl;
-        this.uid=uid;
-        this.description=description;
-        this.statuses_count=statuses_count;
-        this.userIdScreenName=userIdScreenName;
-        this.userIdClass=userIdClass;
-        this.userIdProvince=userIdProvince;
-        this.userIdCity=userIdCity;
-        this.userLocation=userLocation;
-        this.followers_count=followers_count;
-        this.friends_count=friends_count;
-        this.favourite_count=favourite_count;
-        this.created_at=created_at;
+                     String created_at) {
+        this.userIdImageUrl = userIdImageUrl;
+        this.cover_image_phoneUrl = cover_image_phoneUrl;
+        this.uid = uid;
+        this.description = description;
+        this.statuses_count = statuses_count;
+        this.userIdScreenName = userIdScreenName;
+        this.userIdClass = userIdClass;
+        this.userIdProvince = userIdProvince;
+        this.userIdCity = userIdCity;
+        this.userLocation = userLocation;
+        this.followers_count = followers_count;
+        this.friends_count = friends_count;
+        this.favourite_count = favourite_count;
+        this.created_at = created_at;
     }
 
     public void setDescription(String description) {
@@ -68,11 +69,11 @@ public class SavedUser {
         return userIdImageUrl;
     }
 
-    public  void setUserIdScreenName(String userIdScreenName) {
+    public void setUserIdScreenName(String userIdScreenName) {
         this.userIdScreenName = userIdScreenName;
     }
 
-    public  String getUserIdScreenName() {
+    public String getUserIdScreenName() {
         return userIdScreenName;
     }
 

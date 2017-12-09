@@ -38,29 +38,30 @@ public class MainActivity extends AppCompatActivity
     private FragmentTransaction fragmentTransaction;
     //private AllWeiboFragment allWeiboFragment=new AllWeiboFragment();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            =new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-              //      mTextMessage.setText(R.string.title_notifications);
+                    //      mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_dashboard:
-                    fragmentTransaction=fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content,new PrivateMessagesFragment());
-                    Log.d("fragment:","finish");
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content, new PrivateMessagesFragment());
+                    Log.d("fragment:", "finish");
                     fragmentTransaction.addToBackStack(null).commit();
                     return true;
                 case R.id.navigation_notifications:
-                    fragmentTransaction=fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content,new AllWeiboFragment());
-                    Log.d("fragment:","finish");
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content, new AllWeiboFragment());
+                    Log.d("fragment:", "finish");
                     fragmentTransaction.addToBackStack(null).commit();
                     return true;
             }
             return false;
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,26 +71,26 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void init(){
+    private void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        TextView labelView=(TextView)toolbar.findViewById(R.id.label_view);
+        TextView labelView = (TextView) toolbar.findViewById(R.id.label_view);
         labelView.setClickable(true);
         labelView.setText("全部微博");
-        contentLayout =(FrameLayout)findViewById(R.id.content);
+        contentLayout = (FrameLayout) findViewById(R.id.content);
         //mTextMessage= (TextView)contentLayout.findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                final CircleImageView imageViewView=(CircleImageView)drawerView.findViewById(R.id.image_touxiang);
+                final CircleImageView imageViewView = (CircleImageView) drawerView.findViewById(R.id.image_touxiang);
                 Glide.with(MainActivity.this)
                         .load("http://tva1.sinaimg.cn/crop.0.0.1440.1440.50/00696kXijw8ez97jipvbgj3140140gsx.jpg")
                         .asBitmap()
@@ -108,9 +109,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fragmentManager=getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
 
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

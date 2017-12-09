@@ -38,7 +38,7 @@ import static com.example.test.WeiboMessages.AllWeiboMessages.Adapter.MessageAda
  * Created by cyc20 on 2017/12/8.
  */
 
-public class CommentsMainActivity extends AppCompatActivity implements CommentsTabPagerAdapter.TabPagerListener{
+public class CommentsMainActivity extends AppCompatActivity implements CommentsTabPagerAdapter.TabPagerListener {
 
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbar;
@@ -60,6 +60,7 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
 
 
     private CommentsTabPagerAdapter adapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -71,7 +72,7 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comment_activity_main);
-        message=(Message)getIntent().getSerializableExtra("message");
+        message = (Message) getIntent().getSerializableExtra("message");
         toolbar = (Toolbar) findViewById(R.id.comment_toolbar);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.comment_collapsingToolbar);
         tabLayout = (TabLayout) findViewById(R.id.comment_tabLayout);
@@ -91,18 +92,18 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
 
-    private void initView(){
-        comment_name_tv=(TextView)findViewById(R.id.comment_name_tv);
-        comment_pic_iv=(CircleImageView) findViewById(R.id.comment_pic_iv);
-        comment_time_tv=(TextView)findViewById(R.id.comment_time_tv);
-        comment_from_tv=(TextView)findViewById(R.id.comment_from_tv);
-        comment_content_tv=(TextView)findViewById(R.id.comment_content_tv);
-        comment_gridLayout=(GridLayout)findViewById(R.id.comment_gridlayout_main);
-        comment_retweeted_content_main=(LinearLayout)findViewById(R.id.comment_retweeted_container);
-        comment_retweeted_content_tv=(TextView)findViewById(R.id.comment_retweeted_content_tv);
-        comment_retweeted_message_tv=(TextView)findViewById(R.id.comment_retweeted_message_tv);
-        comment_retweeted_gridlayout=(GridLayout)findViewById(R.id.comment_retweeted_gridlayout_main);
-        if (message!=null) {
+    private void initView() {
+        comment_name_tv = (TextView) findViewById(R.id.comment_name_tv);
+        comment_pic_iv = (CircleImageView) findViewById(R.id.comment_pic_iv);
+        comment_time_tv = (TextView) findViewById(R.id.comment_time_tv);
+        comment_from_tv = (TextView) findViewById(R.id.comment_from_tv);
+        comment_content_tv = (TextView) findViewById(R.id.comment_content_tv);
+        comment_gridLayout = (GridLayout) findViewById(R.id.comment_gridlayout_main);
+        comment_retweeted_content_main = (LinearLayout) findViewById(R.id.comment_retweeted_container);
+        comment_retweeted_content_tv = (TextView) findViewById(R.id.comment_retweeted_content_tv);
+        comment_retweeted_message_tv = (TextView) findViewById(R.id.comment_retweeted_message_tv);
+        comment_retweeted_gridlayout = (GridLayout) findViewById(R.id.comment_retweeted_gridlayout_main);
+        if (message != null) {
             comment_name_tv.setText(message.getUser().getName());
             Glide.with(CommentsMainActivity.this)
                     .load(message.getUser().getAvatar_hd())
@@ -116,22 +117,23 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
             comment_time_tv.setText(Utils.parseTime(message.getCreated_at()));
             comment_from_tv.setText(Utils.getSource(message.getSource_url()));
             comment_content_tv.setText(message.getText());
-           if (message.getPic_urls().size()>0){
+            if (message.getPic_urls().size() > 0) {
                 comment_gridLayout.setVisibility(View.VISIBLE);
-                updateViewGroup(message.getPic_urls(),comment_gridLayout,CommentsMainActivity.this);
-                Log.d("pics","load");
+                updateViewGroup(message.getPic_urls(), comment_gridLayout, CommentsMainActivity.this);
+                Log.d("pics", "load");
             }
-            if (message.getRetweeted_status()!=null){
+            if (message.getRetweeted_status() != null) {
                 comment_retweeted_content_main.setVisibility(View.VISIBLE);
                 comment_retweeted_content_tv.setText(message.getRetweeted_status().getText());
- //               comment_retweeted_message_tv.setText(message.getRetweeted_status().getAttitudes_count());
+                //               comment_retweeted_message_tv.setText(message.getRetweeted_status().getAttitudes_count());
             }
 
 
         }
     }
+
     @Override
-    public Fragment getFragment(int position,String id) {
-        return ForwardedFragment.newInstance(position,id);
+    public Fragment getFragment(int position, String id) {
+        return ForwardedFragment.newInstance(position, id);
     }
 }

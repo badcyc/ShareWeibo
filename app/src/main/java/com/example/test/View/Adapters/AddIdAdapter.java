@@ -26,34 +26,37 @@ public class AddIdAdapter extends RecyclerView.Adapter<AddIdAdapter.ViewHolder> 
 
     private ArrayList<SavedUser> savedUsers;
     private Context context;
-    static class ViewHolder extends RecyclerView.ViewHolder{
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView idImageView;
         TextView id_screenName;
         TextView id_selected;
 
-        public ViewHolder(View itemView){
+        public ViewHolder(View itemView) {
             super(itemView);
-            idImageView=(CircleImageView)itemView.findViewById(R.id.id_image);
-            id_screenName=(TextView)itemView.findViewById(R.id.id_screen_name);
-            id_selected=(TextView)itemView.findViewById(R.id.id_selected);
+            idImageView = (CircleImageView) itemView.findViewById(R.id.id_image);
+            id_screenName = (TextView) itemView.findViewById(R.id.id_screen_name);
+            id_selected = (TextView) itemView.findViewById(R.id.id_selected);
 
         }
     }
-    public AddIdAdapter(ArrayList<SavedUser> arrayList, Context context){
-        this.context=context;
-        savedUsers =arrayList;
+
+    public AddIdAdapter(ArrayList<SavedUser> arrayList, Context context) {
+        this.context = context;
+        savedUsers = arrayList;
 
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.addid_main,parent,false);
-        ViewHolder viewHolder=new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addid_main, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        if (savedUsers !=null){
+        if (savedUsers != null) {
             SavedUser savedUser = savedUsers.get(position);
             Glide.with(context)
                     .load(savedUser.getUserIdImageUrl())
@@ -65,7 +68,7 @@ public class AddIdAdapter extends RecyclerView.Adapter<AddIdAdapter.ViewHolder> 
                         }
                     });
             holder.id_screenName.setText(savedUser.getUserIdScreenName());
-            if (savedUser.isSelectedState()){
+            if (savedUser.isSelectedState()) {
                 holder.id_selected.setVisibility(View.VISIBLE);
             }
         }

@@ -31,35 +31,37 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by cyc20 on 2017/12/4.
  */
 
-public class AddIdActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddIdActivity extends AppCompatActivity implements View.OnClickListener {
     public static String directory;
     CircleImageView touxiang;
     Toolbar toolbar;
-    ArrayList<SavedUser> savedUsers =new ArrayList<>();
+    ArrayList<SavedUser> savedUsers = new ArrayList<>();
     RecyclerView recyclerView;
     Button addid_tv;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.addid_activity_main);
-        directory= getExternalFilesDir(null).getAbsolutePath()+"/jsoncache/";
-        toolbar=(Toolbar)findViewById(R.id.toolbar_addid);
+        directory = getExternalFilesDir(null).getAbsolutePath() + "/jsoncache/";
+        toolbar = (Toolbar) findViewById(R.id.toolbar_addid);
         setSupportActionBar(toolbar);
         savedUsers = getSavedUsers();
-        recyclerView=(RecyclerView)findViewById(R.id.addid_recycler_view);
-        addid_tv=(Button) findViewById(R.id.add_id);
+        recyclerView = (RecyclerView) findViewById(R.id.addid_recycler_view);
+        addid_tv = (Button) findViewById(R.id.add_id);
 
         addid_tv.setClickable(true);
         addid_tv.setOnClickListener(this);
-        AddIdAdapter addIdAdapter=new AddIdAdapter(savedUsers,AddIdActivity.this);
+        AddIdAdapter addIdAdapter = new AddIdAdapter(savedUsers, AddIdActivity.this);
         recyclerView.setAdapter(addIdAdapter);
-        LinearLayoutManager manager=new LinearLayoutManager(this, LinearLayout.VERTICAL,false);
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayout.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
     }
-    public ArrayList<SavedUser> getSavedUsers(){
-        ArrayList<SavedUser> savedUsers =new ArrayList<>();
-        File file=new File(directory);
+
+    public ArrayList<SavedUser> getSavedUsers() {
+        ArrayList<SavedUser> savedUsers = new ArrayList<>();
+        File file = new File(directory);
         if (file.exists()) {
             File[] listFile = file.listFiles();
             if (listFile.length > 0) {
@@ -74,7 +76,7 @@ public class AddIdActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.add_id:
                 addid();
                 break;
@@ -84,29 +86,28 @@ public class AddIdActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==101){
+        if (requestCode == 101) {
             if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    &&grantResults[0]==PackageManager.PERMISSION_GRANTED)
-            {
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 addid();
-            }
-            else {
+            } else {
 
             }
         }
     }
-    public void addid(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},101);
-                Log.d("requestPermissions","start");
+
+    public void addid() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+                Log.d("requestPermissions", "start");
                 return;
             }
-            Log.d("requestPermissions","end");
+            Log.d("requestPermissions", "end");
         }
-        Log.d("WeiboAuthActivity","start");
-            Intent intent = new Intent(AddIdActivity.this, WeiboOAuthLoginActivity.class);
-            startActivity(intent);
+        Log.d("WeiboAuthActivity", "start");
+        Intent intent = new Intent(AddIdActivity.this, WeiboOAuthLoginActivity.class);
+        startActivity(intent);
 
     }
 }

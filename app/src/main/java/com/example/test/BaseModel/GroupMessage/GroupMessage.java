@@ -10,10 +10,11 @@ public class GroupMessage {
     public String groupName;
     public ArrayList<String> groupMembers;
 
-    public GroupMessage(String groupName,ArrayList<String> groupMembers){
-        this.groupName=groupName;
-        this.groupMembers=groupMembers;
+    public GroupMessage(String groupName, ArrayList<String> groupMembers) {
+        this.groupName = groupName;
+        this.groupMembers = groupMembers;
     }
+
     public void setGroupMembers(ArrayList<String> groupMembers) {
         this.groupMembers = groupMembers;
     }
