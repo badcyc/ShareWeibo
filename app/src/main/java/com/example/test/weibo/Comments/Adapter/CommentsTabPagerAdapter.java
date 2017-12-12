@@ -1,4 +1,4 @@
-package com.example.test.CommentsActivity.Adapter;
+package com.example.test.weibo.Comments.Adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

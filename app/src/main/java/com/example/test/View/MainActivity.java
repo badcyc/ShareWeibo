@@ -22,10 +22,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.BaseModel.Utils;
 import com.example.test.R;
-import com.example.test.WeiboMessages.AllWeiboMessages.View.AllWeiboFragment;
+
 import com.example.test.View.Fragments.PrivateMessagesFragment;
+import com.example.test.weibo.weibomessages.AllWeiboMessages.View.AllWeiboFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.content, new PrivateMessagesFragment());
                     Log.d("fragment:", "finish");
-                    fragmentTransaction.addToBackStack(null).commit();
+                    fragmentTransaction.commit();
                     return true;
                 case R.id.navigation_notifications:
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.content, new AllWeiboFragment());
                     Log.d("fragment:", "finish");
-                    fragmentTransaction.addToBackStack(null).commit();
+                    fragmentTransaction.commit();
                     return true;
             }
             return false;

@@ -12,9 +12,25 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+
+        debug {
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+        }
+        preview {
+            debuggable false // 是否保留调试信息
+            minifyEnabled true  //是否混淆
+            zipAlignEnabled true // 包优化
+            shrinkResources true // 移除不必要的资源
+            // 代码混淆规则文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //不显示Log
+            buildConfigField "boolean","LOG_DEBUG","false"
         }
     }
 }

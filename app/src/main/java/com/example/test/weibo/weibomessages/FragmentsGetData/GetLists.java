@@ -1,4 +1,4 @@
-package com.example.test.WeiboMessages.FragmentsGetData;
+package com.example.test.weibo.weibomessages.FragmentsGetData;
 
 import android.os.Handler;
 import android.util.Log;

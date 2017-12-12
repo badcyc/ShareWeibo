@@ -1,11 +1,10 @@
-package com.example.test.CommentsActivity.Presenter;
+package com.example.test.weibo.Comments.Presenter;
 
 import android.util.Log;
 
-import com.example.test.BaseModel.Message;
 import com.example.test.BaseModel.User.User;
-import com.example.test.CommentsActivity.Model.CommentData;
-import com.example.test.CommentsActivity.Model.CommentUser;
+import com.example.test.weibo.Comments.Model.CommentData;
+import com.example.test.weibo.Comments.Model.CommentUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +12,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;

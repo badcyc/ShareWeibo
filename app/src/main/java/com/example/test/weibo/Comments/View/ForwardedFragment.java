@@ -1,4 +1,4 @@
-package com.example.test.CommentsActivity.View;
+package com.example.test.weibo.Comments.View;
 
 
 import android.content.Context;
@@ -12,14 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.test.BaseModel.Utils;
-import com.example.test.CommentsActivity.Adapter.ComentRepostAdapter;
-import com.example.test.CommentsActivity.Adapter.CommentsTabPagerAdapter;
-import com.example.test.CommentsActivity.Model.CommentData;
-import com.example.test.CommentsActivity.Presenter.GetData;
+import com.example.test.weibo.Comments.Adapter.ComentRepostAdapter;
+import com.example.test.weibo.Comments.Model.CommentData;
+import com.example.test.weibo.Comments.Presenter.GetData;
 import com.example.test.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

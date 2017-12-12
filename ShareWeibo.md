@@ -123,3 +123,10 @@
 - butterKnife
 - 格式化格式
 
+#### 12月12日
+
+完成:
+- view的bind替换成ButterKnife
+- 重新分一下包
+- 格式化代码
+- debug模式不输出Log信息

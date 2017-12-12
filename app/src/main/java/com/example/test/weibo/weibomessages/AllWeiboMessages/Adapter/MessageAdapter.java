@@ -1,4 +1,4 @@
-package com.example.test.WeiboMessages.AllWeiboMessages.Adapter;
+package com.example.test.weibo.weibomessages.AllWeiboMessages.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.test.BaseModel.Message;
 import com.example.test.BaseModel.Utils;
-import com.example.test.CommentsActivity.View.CommentsMainActivity;
+import com.example.test.weibo.Comments.View.CommentsMainActivity;
 import com.example.test.R;
 
 import java.util.ArrayList;
@@ -39,23 +39,36 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-      @BindView(R.id.name_tv)  TextView name_tv;
-      @BindView(R.id.pic_iv)  CircleImageView pic_iv;
-      @BindView(R.id.time_tv)  TextView time_tv;
-      @BindView(R.id.from_tv)  TextView from_tv;
-      @BindView(R.id.content_tv)  TextView content_tv;
-      @BindView(R.id.repost_count)  TextView reposts_count_btn;
-      @BindView(R.id.attitudes_count)  TextView attitudes_count_btn;
-      @BindView(R.id.comments_count)  TextView comments_count_btn;
-      @BindView(R.id.gridlayout_main)  GridLayout gridLayout;
-      @BindView(R.id.retweeted_container)  LinearLayout retweeted_content_main;
-      @BindView(R.id.retweeted_content_tv)  TextView retweeted_content_tv;
-      @BindView(R.id.retweeted_message_tv)  TextView retweeted_message_tv;
-      @BindView(R.id.retweeted_gridlayout_main)  GridLayout retweeted_gridlayout;
+        @BindView(R.id.name_tv)
+        TextView name_tv;
+        @BindView(R.id.pic_iv)
+        CircleImageView pic_iv;
+        @BindView(R.id.time_tv)
+        TextView time_tv;
+        @BindView(R.id.from_tv)
+        TextView from_tv;
+        @BindView(R.id.content_tv)
+        TextView content_tv;
+        @BindView(R.id.repost_count)
+        TextView reposts_count_btn;
+        @BindView(R.id.attitudes_count)
+        TextView attitudes_count_btn;
+        @BindView(R.id.comments_count)
+        TextView comments_count_btn;
+        @BindView(R.id.gridlayout_main)
+        GridLayout gridLayout;
+        @BindView(R.id.retweeted_container)
+        LinearLayout retweeted_content_main;
+        @BindView(R.id.retweeted_content_tv)
+        TextView retweeted_content_tv;
+        @BindView(R.id.retweeted_message_tv)
+        TextView retweeted_message_tv;
+        @BindView(R.id.retweeted_gridlayout_main)
+        GridLayout retweeted_gridlayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 

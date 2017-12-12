@@ -31,12 +31,16 @@ public class AddIdAdapter extends RecyclerView.Adapter<AddIdAdapter.ViewHolder> 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.id_image) CircleImageView idImageView;
-        @BindView(R.id.id_screen_name) TextView id_screenName;
-        @BindView(R.id.id_selected) TextView id_selected;
+        @BindView(R.id.id_image)
+        CircleImageView idImageView;
+        @BindView(R.id.id_screen_name)
+        TextView id_screenName;
+        @BindView(R.id.id_selected)
+        TextView id_selected;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
 
         }
     }

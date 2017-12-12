@@ -1,4 +1,4 @@
-package com.example.test.CommentsActivity.Model;
+package com.example.test.weibo.Comments.Model;
 
 import java.io.Serializable;
 

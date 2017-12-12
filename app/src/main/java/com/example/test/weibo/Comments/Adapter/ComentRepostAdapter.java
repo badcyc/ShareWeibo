@@ -1,23 +1,19 @@
-package com.example.test.CommentsActivity.Adapter;
+package com.example.test.weibo.Comments.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.widget.GridLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.BaseModel.Message;
 import com.example.test.BaseModel.Utils;
-import com.example.test.CommentsActivity.Model.CommentData;
+import com.example.test.weibo.Comments.Model.CommentData;
 import com.example.test.R;
 
 import java.util.ArrayList;
@@ -39,15 +35,20 @@ public class ComentRepostAdapter extends RecyclerView.Adapter<ComentRepostAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.comments_repost_name_tv) TextView comment_name_tv;
-        @BindView(R.id.comment_pic_iv) CircleImageView comment_pic_iv;
-        @BindView(R.id.comment_time_tv) TextView comment_time_tv;
-        @BindView(R.id.comment_from_tv) TextView comment_from_tv;
-        @BindView(R.id.comment_content_tv) TextView comment_content_tv;
+        @BindView(R.id.comments_repost_name_tv)
+        TextView comment_name_tv;
+        @BindView(R.id.comment_pic_iv)
+        CircleImageView comment_pic_iv;
+        @BindView(R.id.comment_time_tv)
+        TextView comment_time_tv;
+        @BindView(R.id.comment_from_tv)
+        TextView comment_from_tv;
+        @BindView(R.id.comment_content_tv)
+        TextView comment_content_tv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
 
         }
     }

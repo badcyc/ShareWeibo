@@ -1,4 +1,4 @@
-package com.example.test.WeiboMessages.AllWeiboMessages.View;
+package com.example.test.weibo.weibomessages.AllWeiboMessages.View;
 
 import android.app.Activity;
 
@@ -14,11 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.test.WeiboMessages.AllWeiboMessages.Adapter.MessageAdapter;
+
 import com.example.test.BaseModel.Message;
 import com.example.test.BaseModel.Utils;
-import com.example.test.WeiboMessages.FragmentsGetData.GetLists;
+
 import com.example.test.R;
+import com.example.test.weibo.weibomessages.AllWeiboMessages.Adapter.MessageAdapter;
+import com.example.test.weibo.weibomessages.FragmentsGetData.GetLists;
 
 import java.util.ArrayList;
 

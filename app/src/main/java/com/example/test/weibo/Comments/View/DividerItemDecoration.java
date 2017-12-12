@@ -1,4 +1,4 @@
-package com.example.test.CommentsActivity.View;
+package com.example.test.weibo.Comments.View;
 
 import android.content.Context;
 import android.content.res.TypedArray;

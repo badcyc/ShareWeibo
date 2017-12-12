@@ -41,9 +41,13 @@ public class AddIdActivity extends AppCompatActivity implements View.OnClickList
 
     ArrayList<SavedUser> savedUsers = new ArrayList<>();
 
-    @BindView(R.id.add_id) Button addid_tv;
-    @BindView(R.id.toolbar_addid) Toolbar toolbar;
-    @BindView(R.id.addid_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.add_id)
+    Button addid_tv;
+    @BindView(R.id.toolbar_addid)
+    Toolbar toolbar;
+    @BindView(R.id.addid_recycler_view)
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

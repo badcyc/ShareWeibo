@@ -1,4 +1,4 @@
-package com.example.test.CommentsActivity.View;
+package com.example.test.weibo.Comments.View;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -24,14 +24,15 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.test.BaseModel.Message;
 import com.example.test.BaseModel.Utils;
-import com.example.test.CommentsActivity.Adapter.CommentsTabPagerAdapter;
+import com.example.test.weibo.Comments.Adapter.CommentsTabPagerAdapter;
 import com.example.test.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.example.test.WeiboMessages.AllWeiboMessages.Adapter.MessageAdapter.updateViewGroup;
+import static com.example.test.weibo.weibomessages.AllWeiboMessages.Adapter.MessageAdapter.updateViewGroup;
+
 
 /**
  * Created by cyc20 on 2017/12/8.
