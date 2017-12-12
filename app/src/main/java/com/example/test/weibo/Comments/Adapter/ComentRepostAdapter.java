@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.test.BaseModel.Utils;
-import com.example.test.weibo.Comments.Model.CommentData;
+import com.example.test.weibo.Comments.Bean.CommentData;
 import com.example.test.R;
 
 import java.util.ArrayList;

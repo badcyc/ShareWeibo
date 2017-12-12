@@ -130,3 +130,9 @@
 - 重新分一下包
 - 格式化代码
 - debug模式不输出Log信息
+- 尝试MVP
+- 学习自定义Dialog
+
+坑：
+
+- radioGroup中`onCheckedChanged(RadioGroup radioGroup, int i)`中的i是resourceId不是位置i;

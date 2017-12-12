@@ -1,4 +1,4 @@
-package com.example.test.weibo.weibomessages.AllWeiboMessages.Adapter;
+package com.example.test.weibo.BaseAdapter;
 
 import android.content.Context;
 import android.content.Intent;

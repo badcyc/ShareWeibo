@@ -13,15 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.test.BaseModel.Utils;
-
 import com.example.test.BaseModel.Message;
 
 import com.example.test.R;
-import com.example.test.weibo.weibomessages.AllWeiboMessages.Adapter.MessageAdapter;
-import com.example.test.weibo.weibomessages.FragmentsGetData.GetLists;
+import com.example.test.weibo.BaseAdapter.MessageAdapter;
+import com.example.test.weibo.Utils.GetLists;
 
 import java.util.ArrayList;
+
+import static com.example.test.weibo.weibomessages.MyWeiboMessages.config.getSelfContent;
 
 /**
  * Created by cyc20 on 2017/12/6.
@@ -107,7 +107,7 @@ public class MyWeiboFragment extends Fragment {
 
 
     private void initDate() {
-        lists = GetLists.getList(handler, Utils.getContentUrl);
+        lists = GetLists.getList(handler, getSelfContent);
 
     }
 

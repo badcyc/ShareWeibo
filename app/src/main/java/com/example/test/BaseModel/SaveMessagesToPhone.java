@@ -12,7 +12,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import static com.example.test.View.AddIdActivity.directory;
+import static com.example.test.navigation.accountmanagement.Activity.AddIdActivity.directory;
 
 
 /**

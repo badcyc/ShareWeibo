@@ -1,4 +1,4 @@
-package com.example.test.View.MyView;
+package com.example.test.weibo.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,22 +15,36 @@ import com.example.test.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by cyc20 on 2017/12/6.
  */
 
 public class MyDialog extends AlertDialog implements View.OnClickListener{
     Context context;
+
+    @BindView(R.id.radio_button_group)
     RadioGroup radioGroup;
+    @BindView(R.id.radio_button_single)
     RadioButton radioButton;
+    @BindView(R.id.group_manager)
     Button groupManagerButton;
+    @BindView(R.id.dialog_cancel)
     Button cancelButton;
-    ArrayList<GroupMessage> messages;
+    ArrayList<GroupMessage> messages=new ArrayList<>();
     protected MyDialog(Context context) {
         super(context);
+        GroupMessage message=new GroupMessage("全部微博",null);
+        this.messages.add(message);
+        message=new GroupMessage("我的微博",null);
+        this.messages.add(message);
+        message=new GroupMessage("朋友圈",null);
+        this.messages.add(message);
     }
     protected MyDialog(Context context, ArrayList<GroupMessage>messages){
-        super(context);
+        this(context);
         this.messages=messages;
     }
     protected MyDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
@@ -45,14 +59,8 @@ public class MyDialog extends AlertDialog implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_main);
-        initView();
+        ButterKnife.bind(this);
         initData();
-    }
-    public void initView(){
-        radioGroup=(RadioGroup)findViewById(R.id.radio_button_group);
-        radioButton=(RadioButton)findViewById(R.id.radio_button_single);
-        groupManagerButton=(Button)findViewById(R.id.group_manager);
-        cancelButton=(Button)findViewById(R.id.dialog_cancel);
     }
     public void initData(){
         cancelButton.setOnClickListener(this);
@@ -63,7 +71,7 @@ public class MyDialog extends AlertDialog implements View.OnClickListener{
                     RadioGroup.LayoutParams.WRAP_CONTENT);
             RadioButton radioButton=new RadioButton(context);
             radioButton.setText(messages.get(i).getGroupName());
-            radioGroup.addView(radioButton);
+            radioGroup.addView(radioButton,layoutParams);
         }
     }
 

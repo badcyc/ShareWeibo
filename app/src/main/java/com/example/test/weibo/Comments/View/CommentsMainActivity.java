@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.example.test.weibo.weibomessages.AllWeiboMessages.Adapter.MessageAdapter.updateViewGroup;
+import static com.example.test.weibo.BaseAdapter.MessageAdapter.updateViewGroup;
 
 
 /**
@@ -102,6 +102,9 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
         commentViewpager.setAdapter(adapter);
         commentTabLayout.setupWithViewPager(commentViewpager);
         commentTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void initView() {
@@ -117,7 +120,7 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
                         }
                     });
             commentTimeTv.setText(Utils.parseTime(message.getCreated_at()));
-            commentFromTv.setText(Utils.getSource(message.getSource_url()));
+          //  commentFromTv.setText(Utils.getSource(message.getSource_url()));
             commentContentTv.setText(message.getText());
             if (message.getPic_urls().size() > 0) {
                 commentGridlayoutMain.setVisibility(View.VISIBLE);

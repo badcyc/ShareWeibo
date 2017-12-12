@@ -1,4 +1,4 @@
-package com.example.test.View;
+package com.example.test.navigation.accountmanagement.Activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 
-import com.example.test.View.Adapters.AddIdAdapter;
+import com.example.test.navigation.accountmanagement.Adapters.AddIdAdapter;
 import com.example.test.BaseModel.GetMessagesFromPhone;
 import com.example.test.BaseModel.User.SavedUser;
 import com.example.test.R;
@@ -51,8 +51,9 @@ public class AddIdActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
+
         setContentView(R.layout.addid_activity_main);
+        ButterKnife.bind(this);
         directory = getExternalFilesDir(null).getAbsolutePath() + "/jsoncache/";
 
         setSupportActionBar(toolbar);

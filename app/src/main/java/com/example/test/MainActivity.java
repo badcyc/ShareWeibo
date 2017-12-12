@@ -1,12 +1,12 @@
-package com.example.test.View;
+package com.example.test;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,18 +22,26 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.R;
-
 import com.example.test.View.Fragments.PrivateMessagesFragment;
+import com.example.test.weibo.dialog.DialogMy;
+import com.example.test.weibo.dialog.MyDialog;
 import com.example.test.weibo.weibomessages.AllWeiboMessages.View.AllWeiboFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,DialogMy.OnRadioButtonClickListener{
 
+    @BindView(R.id.label_view)
+    TextView labelView;
     private FrameLayout contentLayout;
-    private TextView mTextMessage;
+
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     //private AllWeiboFragment allWeiboFragment=new AllWeiboFragment();
@@ -66,6 +74,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         init();
 
@@ -76,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        TextView labelView = (TextView) toolbar.findViewById(R.id.label_view);
+
         labelView.setClickable(true);
         labelView.setText("全部微博");
         contentLayout = (FrameLayout) findViewById(R.id.content);
@@ -165,5 +174,22 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @OnClick(R.id.label_view)
+    public void onClick() {
+        List<String> group=new ArrayList<>();
+        group.add("全部微博");
+        group.add("我的微博");
+        DialogMy dialogMy=new DialogMy.Builder(MainActivity.this)
+                .setOnItemClickListener(this)
+                .setRadioGroup(group)
+                .create();
+        dialogMy.show();
+    }
+
+    @Override
+    public void onRadioButtonSelected(String name) {
+        labelView.setText(name);
     }
 }

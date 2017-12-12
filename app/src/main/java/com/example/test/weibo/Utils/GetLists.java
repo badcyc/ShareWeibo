@@ -1,4 +1,4 @@
-package com.example.test.weibo.weibomessages.FragmentsGetData;
+package com.example.test.weibo.Utils;
 
 import android.os.Handler;
 import android.util.Log;
@@ -38,7 +38,7 @@ public class GetLists {
         Log.d("access_send", access_token);
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder.addQueryParameter("access_token", access_token);
-        httpBuilder.addQueryParameter("count", "5");          //数量20
+        httpBuilder.addQueryParameter("count", "20");          //数量20
         Request request = new Request.Builder()
                 .url(httpBuilder.build())
                 .get()

@@ -13,14 +13,15 @@ import android.view.ViewGroup;
 
 import com.example.test.BaseModel.Utils;
 import com.example.test.weibo.Comments.Adapter.ComentRepostAdapter;
-import com.example.test.weibo.Comments.Model.CommentData;
-import com.example.test.weibo.Comments.Presenter.GetData;
+import com.example.test.weibo.Comments.Bean.CommentData;
 import com.example.test.R;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.test.weibo.Comments.Bean.Utils.getCommentRepostData;
 
 /**
  * Created by cyc20 on 2017/12/7.
@@ -78,7 +79,7 @@ public class ForwardedFragment extends Fragment {
 
     }
     private synchronized void initDate(){
-        dataList= GetData.getCommentRepostData(Utils.getCommentsDataUrl,id);
+        dataList= getCommentRepostData(Utils.getCommentsDataUrl,id);
     }
     private void initAdapter(ArrayList<CommentData> data) {
         //mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));

@@ -1,10 +1,8 @@
-package com.example.test.weibo.Comments.Presenter;
+package com.example.test.weibo.Comments.Bean;
 
 import android.util.Log;
 
 import com.example.test.BaseModel.User.User;
-import com.example.test.weibo.Comments.Model.CommentData;
-import com.example.test.weibo.Comments.Model.CommentUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,10 +21,10 @@ import okhttp3.Response;
 import static com.example.test.BaseModel.Utils.access_token;
 
 /**
- * Created by cyc20 on 2017/12/8.
+ * Created by cyc20 on 2017/12/12.
  */
 
-public class GetData {
+public class Utils {
     public static synchronized ArrayList<CommentData> getCommentRepostData(String url, String id) {
         final ArrayList<CommentData> messages = new ArrayList<>();
         OkHttpClient httpClient = new OkHttpClient();
@@ -101,4 +99,3 @@ public class GetData {
         return messages;
     }
 }
-

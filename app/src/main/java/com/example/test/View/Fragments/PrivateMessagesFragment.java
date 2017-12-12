@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.test.R;
-import com.example.test.View.AddIdActivity;
+import com.example.test.navigation.accountmanagement.Activity.AddIdActivity;
 
 /**
  * Created by cyc20 on 2017/12/4.

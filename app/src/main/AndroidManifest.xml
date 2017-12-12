@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".View.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.WeiboOAuthLoginActivity">
+        <activity android:name=".navigation.accountmanagement.Activity.WeiboOAuthLoginActivity">
 
         </activity>
-        <activity android:name=".View.AddIdActivity"
+        <activity android:name=".navigation.accountmanagement.Activity.AddIdActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

@@ -1,4 +1,4 @@
-package com.example.test.View.Adapters;
+package com.example.test.navigation.accountmanagement.Adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;

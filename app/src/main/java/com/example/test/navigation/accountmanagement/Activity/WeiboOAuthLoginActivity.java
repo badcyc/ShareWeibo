@@ -1,4 +1,4 @@
-package com.example.test.View;
+package com.example.test.navigation.accountmanagement.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.test.BaseModel.Utils;
+import com.example.test.MainActivity;
 import com.example.test.R;
 
 import org.json.JSONException;
@@ -18,13 +19,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.test.weibo.weibomessages.FragmentsGetData.GetLists.getUid;
+import static com.example.test.weibo.Utils.GetLists.getUid;
 
 /**
  * Created by cyc20 on 2017/11/28.
@@ -39,13 +42,15 @@ public class WeiboOAuthLoginActivity extends AppCompatActivity {
     private static final String get_accessToken_uri = "https://api.weibo.com/oauth2/access_token";
     private String code;
     private String access_token;
-    private WebView webView;
+    @BindView(R.id.WebView)
+    WebView webView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        webView = (WebView) findViewById(R.id.WebView);
+        ButterKnife.bind(this);
+        //webView = (WebView) findViewById(R.id.WebView);
         WebSettings webSettings = webView.getSettings();
 
 //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript

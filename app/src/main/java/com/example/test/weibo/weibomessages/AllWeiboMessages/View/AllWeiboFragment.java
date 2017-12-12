@@ -19,8 +19,8 @@ import com.example.test.BaseModel.Message;
 import com.example.test.BaseModel.Utils;
 
 import com.example.test.R;
-import com.example.test.weibo.weibomessages.AllWeiboMessages.Adapter.MessageAdapter;
-import com.example.test.weibo.weibomessages.FragmentsGetData.GetLists;
+import com.example.test.weibo.BaseAdapter.MessageAdapter;
+import com.example.test.weibo.Utils.GetLists;
 
 import java.util.ArrayList;
 
