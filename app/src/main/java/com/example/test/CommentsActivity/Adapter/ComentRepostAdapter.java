@@ -22,6 +22,8 @@ import com.example.test.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -36,19 +38,16 @@ public class ComentRepostAdapter extends RecyclerView.Adapter<ComentRepostAdapte
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView comment_name_tv;
-        CircleImageView comment_pic_iv;
-        TextView comment_time_tv;
-        TextView comment_from_tv;
-        TextView comment_content_tv;
+
+        @BindView(R.id.comments_repost_name_tv) TextView comment_name_tv;
+        @BindView(R.id.comment_pic_iv) CircleImageView comment_pic_iv;
+        @BindView(R.id.comment_time_tv) TextView comment_time_tv;
+        @BindView(R.id.comment_from_tv) TextView comment_from_tv;
+        @BindView(R.id.comment_content_tv) TextView comment_content_tv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            comment_name_tv = (TextView) itemView.findViewById(R.id.comments_repost_name_tv);
-            comment_pic_iv = (CircleImageView) itemView.findViewById(R.id.comments_repost_image);
-            comment_time_tv = (TextView) itemView.findViewById(R.id.comments_repost_time_tv);
-            comment_from_tv = (TextView) itemView.findViewById(R.id.comments_repost_from_tv);
-            comment_content_tv = (TextView) itemView.findViewById(R.id.comments_repost_content_tv);
+            ButterKnife.bind(this,itemView);
 
         }
     }

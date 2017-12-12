@@ -16,6 +16,8 @@ import com.example.test.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -28,15 +30,13 @@ public class AddIdAdapter extends RecyclerView.Adapter<AddIdAdapter.ViewHolder> 
     private Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView idImageView;
-        TextView id_screenName;
-        TextView id_selected;
 
+        @BindView(R.id.id_image) CircleImageView idImageView;
+        @BindView(R.id.id_screen_name) TextView id_screenName;
+        @BindView(R.id.id_selected) TextView id_selected;
         public ViewHolder(View itemView) {
             super(itemView);
-            idImageView = (CircleImageView) itemView.findViewById(R.id.id_image);
-            id_screenName = (TextView) itemView.findViewById(R.id.id_screen_name);
-            id_selected = (TextView) itemView.findViewById(R.id.id_selected);
+            ButterKnife.bind(this,itemView);
 
         }
     }

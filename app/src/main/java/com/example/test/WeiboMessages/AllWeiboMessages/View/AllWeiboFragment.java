@@ -22,6 +22,9 @@ import com.example.test.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by cyc20 on 2017/11/29.
  */
@@ -31,10 +34,13 @@ public class AllWeiboFragment extends Fragment {
     private int progress;
     private Context context = null;
     public ArrayList<Message> lists = new ArrayList<>();
-    //public TaskAdapter adapter;
+
     MessageAdapter adapter;
     private String mParam1;
     private String mParam2;
+
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(android.os.Message msg) {
@@ -73,19 +79,15 @@ public class AllWeiboFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-     /*  if (lists==null){
-            lists=new ArrayList<>();
-        }
-        if(savedInstanceState!=null){
-            lists=(ArrayList)getArguments().getSerializable(ARG_PARAM1);
-        }*/
         View view = inflater.inflate(R.layout.fragment_weibo, null);
         initDate();
         adapter = new MessageAdapter(lists, context);
         Log.d("adapter:", "finish");
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        ButterKnife.bind(this,view);
+
+
         recyclerView.setAdapter(adapter);
-        //recyclerView.addItemDecoration(new RecyclerViewDivider);
+
         Log.d("recyclerView:", "finish");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL, false);

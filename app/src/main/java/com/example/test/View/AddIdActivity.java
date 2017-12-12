@@ -25,6 +25,8 @@ import com.example.test.R;
 import java.io.File;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -33,23 +35,24 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddIdActivity extends AppCompatActivity implements View.OnClickListener {
     public static String directory;
-    CircleImageView touxiang;
-    Toolbar toolbar;
-    ArrayList<SavedUser> savedUsers = new ArrayList<>();
-    RecyclerView recyclerView;
-    Button addid_tv;
 
+
+    CircleImageView touxiang;
+
+    ArrayList<SavedUser> savedUsers = new ArrayList<>();
+
+    @BindView(R.id.add_id) Button addid_tv;
+    @BindView(R.id.toolbar_addid) Toolbar toolbar;
+    @BindView(R.id.addid_recycler_view) RecyclerView recyclerView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ButterKnife.bind(this);
         setContentView(R.layout.addid_activity_main);
         directory = getExternalFilesDir(null).getAbsolutePath() + "/jsoncache/";
-        toolbar = (Toolbar) findViewById(R.id.toolbar_addid);
+
         setSupportActionBar(toolbar);
         savedUsers = getSavedUsers();
-        recyclerView = (RecyclerView) findViewById(R.id.addid_recycler_view);
-        addid_tv = (Button) findViewById(R.id.add_id);
 
         addid_tv.setClickable(true);
         addid_tv.setOnClickListener(this);

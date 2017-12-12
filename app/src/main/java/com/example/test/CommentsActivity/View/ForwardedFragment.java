@@ -21,6 +21,9 @@ import com.example.test.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by cyc20 on 2017/12/7.
  */
@@ -30,7 +33,7 @@ public class ForwardedFragment extends Fragment {
 
     private String id;
     private ArrayList<CommentData> dataList=new ArrayList<>();
-    RecyclerView mRecyclerView;
+    @BindView(R.id.mrecyclerview) RecyclerView mRecyclerView;
     private Context context;
     private int mPage;
     public static final String MERCHANT_DETAILS_PAGE = "MERCHANT_DETAILS_PAGE";
@@ -57,7 +60,7 @@ public class ForwardedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.forwardedfragment_main,container,false);
-        mRecyclerView=(RecyclerView)view.findViewById(R.id.mrecyclerview);
+        ButterKnife.bind(this,view);
         switch (mPage){
             case 0:
                 initDate();

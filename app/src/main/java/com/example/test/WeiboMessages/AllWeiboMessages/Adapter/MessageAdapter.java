@@ -24,6 +24,8 @@ import com.example.test.R;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -37,35 +39,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name_tv;
-        CircleImageView pic_iv;
-        TextView time_tv;
-        TextView from_tv;
-        TextView content_tv;
-        TextView reposts_count_btn;
-        TextView attitudes_count_btn;
-        TextView comments_count_btn;
-        GridLayout gridLayout;
-        LinearLayout retweeted_content_main;
-        TextView retweeted_content_tv;
-        TextView retweeted_message_tv;
-        GridLayout retweeted_gridlayout;
+      @BindView(R.id.name_tv)  TextView name_tv;
+      @BindView(R.id.pic_iv)  CircleImageView pic_iv;
+      @BindView(R.id.time_tv)  TextView time_tv;
+      @BindView(R.id.from_tv)  TextView from_tv;
+      @BindView(R.id.content_tv)  TextView content_tv;
+      @BindView(R.id.repost_count)  TextView reposts_count_btn;
+      @BindView(R.id.attitudes_count)  TextView attitudes_count_btn;
+      @BindView(R.id.comments_count)  TextView comments_count_btn;
+      @BindView(R.id.gridlayout_main)  GridLayout gridLayout;
+      @BindView(R.id.retweeted_container)  LinearLayout retweeted_content_main;
+      @BindView(R.id.retweeted_content_tv)  TextView retweeted_content_tv;
+      @BindView(R.id.retweeted_message_tv)  TextView retweeted_message_tv;
+      @BindView(R.id.retweeted_gridlayout_main)  GridLayout retweeted_gridlayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name_tv = (TextView) itemView.findViewById(R.id.name_tv);
-            pic_iv = (CircleImageView) itemView.findViewById(R.id.pic_iv);
-            time_tv = (TextView) itemView.findViewById(R.id.time_tv);
-            from_tv = (TextView) itemView.findViewById(R.id.from_tv);
-            content_tv = (TextView) itemView.findViewById(R.id.content_tv);
-            reposts_count_btn = (TextView) itemView.findViewById(R.id.repost_count);
-            comments_count_btn = (TextView) itemView.findViewById(R.id.comments_count);
-            attitudes_count_btn = (TextView) itemView.findViewById(R.id.attitudes_count);
-            gridLayout = (GridLayout) itemView.findViewById(R.id.gridlayout_main);
-            retweeted_content_main = (LinearLayout) itemView.findViewById(R.id.retweeted_container);
-            retweeted_content_tv = (TextView) itemView.findViewById(R.id.retweeted_content_tv);
-            retweeted_message_tv = (TextView) itemView.findViewById(R.id.retweeted_message_tv);
-            retweeted_gridlayout = (GridLayout) itemView.findViewById(R.id.retweeted_gridlayout_main);
+            ButterKnife.bind(this,itemView);
         }
     }
 
