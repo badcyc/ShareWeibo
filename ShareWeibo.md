@@ -136,3 +136,16 @@
 坑：
 
 - radioGroup中`onCheckedChanged(RadioGroup radioGroup, int i)`中的i是resourceId不是位置i;
+
+#### 12月13日
+
+MVP：
+- View 层：视图层，包含界面的相关的功能。例如各种Activity、Fragment、View、Adapter等。
+- Presenter层:逻辑控制层
+- Model层:封装各种数据来源。例如远程网络数据，本地数据库数据，对Presenter层提供简单易用的数据接口。
+
+> - https://github.com/googlesamples/android-architecture
+> - https://github.com/googlesamples/android-architecture/tree/todo-mvp/todoapp
+
+BuildConfig里添加AppKey重要信息
+

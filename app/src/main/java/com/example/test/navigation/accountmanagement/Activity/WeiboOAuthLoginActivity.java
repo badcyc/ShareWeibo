@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.test.BaseModel.Utils;
+import com.example.test.BuildConfig;
 import com.example.test.MainActivity;
 import com.example.test.R;
 
@@ -36,7 +37,7 @@ import static com.example.test.weibo.Utils.GetLists.getUid;
 public class WeiboOAuthLoginActivity extends AppCompatActivity {
 
     private static final String getCode_url = "https://api.weibo.com/oauth2/authorize?" +
-            "client_id=2748897403" +
+            "client_id=2748897403"+ BuildConfig.APPLICATION_ID+
             "&response_type=code" +
             "&redirect_uri=http://www.sina.com";
     private static final String get_accessToken_uri = "https://api.weibo.com/oauth2/access_token";

@@ -31,6 +31,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //不显示Log
             buildConfigField "boolean","LOG_DEBUG","false"
+            buildConfigField "String","APP_KEY","\"${AppKey}\""
+            buildConfigField "String","APP_Secret","\"${AppSecret}\""
         }
     }
 }

@@ -102,7 +102,7 @@ public class DialogMy extends Dialog {
         }
     }
 
-    public static interface OnRadioButtonClickListener {
+    public interface OnRadioButtonClickListener {
         void onRadioButtonSelected(String name);
     }
 }
