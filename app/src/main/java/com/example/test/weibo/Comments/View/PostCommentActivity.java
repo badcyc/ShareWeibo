@@ -3,6 +3,9 @@ package com.example.test.weibo.Comments.View;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -20,6 +24,9 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.test.BaseModel.Message;
 import com.example.test.R;
 import com.example.test.weibo.Comments.Bean.CommentData;
+import com.example.test.weibo.emoji.EmojiFaceAdapter;
+import com.example.test.weibo.emoji.EmojiPagerAdapter;
+import com.example.test.weibo.emoji.EmojiPagerFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,8 +37,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by cyc20 on 2017/12/13.
  */
 
-public class PostCommentActivity extends AppCompatActivity {
+public class PostCommentActivity extends AppCompatActivity implements EmojiPagerAdapter.EmojiTabPagerListener{
     Message message;
+    private EmojiPagerAdapter emojiPagerAdapter;
     @BindView(R.id.post_comment_toolbar)
     Toolbar postCommentToolbar;
     @BindView(R.id.post_comment_Avatar)
@@ -50,7 +58,12 @@ public class PostCommentActivity extends AppCompatActivity {
     ImageView postCommentEmotion;
     @BindView(R.id.post_comment_send)
     ImageView postCommentSend;
-
+    @BindView(R.id.emoji_linear_layout)
+    LinearLayout emojiLinearLayout;
+    @BindView(R.id.emoji_tab_layout)
+    TabLayout emojiTabLayout;
+    @BindView(R.id.emoji_view_pager)
+    ViewPager emojiViewPager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,10 +101,22 @@ public class PostCommentActivity extends AppCompatActivity {
             case R.id.post_comment_search:
                 break;
             case R.id.post_comment_emotion:
+                emojiLinearLayout.setVisibility(View.VISIBLE);
+                emojiPagerAdapter=new EmojiPagerAdapter(getSupportFragmentManager(),this,4);
+                emojiPagerAdapter.setListener(this);
+
+                emojiViewPager.setAdapter(emojiPagerAdapter);
+                emojiTabLayout.setupWithViewPager(emojiViewPager);
+                emojiTabLayout.setTabMode(TabLayout.MODE_FIXED);
                 break;
             case R.id.post_comment_send:
                 break;
         }
+    }
+
+    @Override
+    public Fragment getFragment(int position) {
+        return EmojiPagerFragment.newInstance(position);
     }
 
     @Override
