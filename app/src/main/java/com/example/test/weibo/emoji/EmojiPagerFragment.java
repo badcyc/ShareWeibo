@@ -38,12 +38,13 @@ public class EmojiPagerFragment extends Fragment {
     private Context context;
     private int mPage;
     public static final String MERCHANT_DETAILS_PAGE = "MERCHANT_DETAILS_PAGE";
+
     //private ComentRepostAdapter mAdapter;
-    public static EmojiPagerFragment newInstance(int page){
-        Bundle args=new Bundle();
-        args.putInt(MERCHANT_DETAILS_PAGE,page);
-       // args.putString("id",id);
-        EmojiPagerFragment fragment=new EmojiPagerFragment();
+    public static EmojiPagerFragment newInstance(int page) {
+        Bundle args = new Bundle();
+        args.putInt(MERCHANT_DETAILS_PAGE, page);
+        // args.putString("id",id);
+        EmojiPagerFragment fragment = new EmojiPagerFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,34 +52,37 @@ public class EmojiPagerFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage=getArguments().getInt(MERCHANT_DETAILS_PAGE);
-       // id=getArguments().getString("id");
-        context=getActivity().getApplicationContext();
+        mPage = getArguments().getInt(MERCHANT_DETAILS_PAGE);
+        // id=getArguments().getString("id");
+        context = getActivity().getApplicationContext();
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.emoji_gridview_main,container,false);
-        ButterKnife.bind(this,view);
-        switch (mPage){
+        View view = inflater.inflate(R.layout.emoji_gridview_main, container, false);
+        ButterKnife.bind(this, view);
+        switch (mPage) {
             case 0:
-
-                initAdapter();
+                initAdapter(1);
                 break;
             case 1:
-
-                initAdapter();
+                initAdapter(2);
                 break;
             case 2:
-                initAdapter();
+                initAdapter(3);
                 break;
-                default:break;
+            case 3:
+                initAdapter(4);
+                break;
+            default:
+                break;
         }
         return view;
 
     }
+
     /*private synchronized void initDate(){
         dataList= getCommentRepostData(Utils.getCommentsDataUrl,id);
     }*/
@@ -90,22 +94,23 @@ public class EmojiPagerFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);//设置adapter
         //设置item点击事件
     }*/
-  private void initAdapter(){
-      final EmojiFaceAdapter emojiFaceAdapter=new EmojiFaceAdapter(context);
-      emojiGridView.setAdapter(emojiFaceAdapter);
-      emojiGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          public void onItemClick(AdapterView<?> parent, View view,
-                                  int position, long id) {
-              SpannableString spannableString = new SpannableString(view
-                      .getTag().toString());
-              Drawable drawable = getResources().getDrawable(
-                      (int) emojiFaceAdapter.getItemId(position));
-              drawable.setBounds(0, 0, 35, 35);
-              ImageSpan imageSpan = new ImageSpan(drawable,
-                      ImageSpan.ALIGN_BOTTOM);
-              spannableString.setSpan(imageSpan, 0, view.getTag().toString()
-                      .length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-          }
-      });
-  }
+    private void initAdapter(int page) {
+        final EmojiFaceAdapter emojiFaceAdapter = new EmojiFaceAdapter(context, page);
+        emojiGridView.setAdapter(emojiFaceAdapter);
+        emojiGridView.setNumColumns(7);
+        emojiGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                SpannableString spannableString = new SpannableString(view
+                        .getTag().toString());
+                Drawable drawable = getResources().getDrawable(
+                        (int) emojiFaceAdapter.getItemId(position));
+                drawable.setBounds(0, 0, 35, 35);
+                ImageSpan imageSpan = new ImageSpan(drawable,
+                        ImageSpan.ALIGN_BOTTOM);
+                spannableString.setSpan(imageSpan, 0, view.getTag().toString()
+                        .length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        });
+    }
 }
