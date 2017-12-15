@@ -2,16 +2,17 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/comment_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:theme="@style/ToolbarTheme"
         android:fitsSystemWindows="true"
-        app:layout_scrollFlags="scroll|enterAlways">
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:theme="@style/ToolbarTheme">
 
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -23,136 +24,144 @@
             <!--app:navigationIcon="@mipmap/back"-->
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerInside"
-                app:layout_collapseMode="parallax"
+                android:layout_marginTop="?attr/actionBarSize"
                 android:fitsSystemWindows="true"
                 android:orientation="vertical"
-                android:layout_marginTop="?attr/actionBarSize">
+                android:scaleType="centerInside"
+                app:layout_collapseMode="parallax">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/comment_pic_iv"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:civ_border_color="@color/colorAccent"
+                        app:civ_border_width="2dp" />
 
                     <LinearLayout
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="10"
+                        android:orientation="vertical">
 
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/comment_pic_iv"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            app:civ_border_width="2dp"
-                            app:civ_border_color="@color/colorAccent"
-                            />
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="10"
+                        <TextView
+                            android:id="@+id/comment_name_tv"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:orientation="vertical">
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
                             <TextView
-                                android:id="@+id/comment_name_tv"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="20dp" />
-                            <LinearLayout
-                                android:orientation="horizontal"
+                                android:id="@+id/comment_time_tv"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-                                <TextView
-                                    android:id="@+id/comment_time_tv"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="10sp"/>
-                                <TextView
-                                    android:text="来自"
-                                    android:textSize="10sp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                                <TextView
-                                    android:id="@+id/comment_from_tv"
-                                    android:textSize="10sp"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
+                                android:layout_height="wrap_content"
+                                android:textSize="10sp" />
+
                             <TextView
-                                android:id="@+id/comment_content_tv"
-                                android:textSize="20sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="来自"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:id="@+id/comment_from_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/comment_content_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp" />
+
+                        <android.support.v7.widget.GridLayout
+                            android:id="@+id/comment_gridlayout_main"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:columnCount="3">
+
+                            <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/comment_image_view"
+                                android:layout_width="0dp"
+                                android:layout_height="100dp"
+                                android:layout_margin="1dp"
+                                android:scaleType="centerCrop"
+                                app:layout_columnWeight="1" />
+
+                        </android.support.v7.widget.GridLayout>
+
+                        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/comment_retweeted_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/comment_retweeted_content_tv"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/comment_retweeted_message_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
                             <android.support.v7.widget.GridLayout
-                                android:id="@+id/comment_gridlayout_main"
-                                android:visibility="gone"
+                                android:id="@+id/comment_retweeted_gridlayout_main"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 app:columnCount="3">
-                                <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    xmlns:android="http://schemas.android.com/apk/res/android"
-                                    android:id="@+id/comment_image_view"
+
+                                <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:id="@+id/comment_retweeted_image_view"
                                     android:layout_width="0dp"
                                     android:layout_height="100dp"
                                     android:layout_margin="1dp"
                                     android:scaleType="centerCrop"
-                                    app:layout_columnWeight="1"
-                                    />
+                                    app:layout_columnWeight="1" />
 
                             </android.support.v7.widget.GridLayout>
-                            <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-                                xmlns:android="http://schemas.android.com/apk/res/android"
-                                android:id="@+id/comment_retweeted_container"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                >
-                                <TextView
-                                    android:id="@+id/comment_retweeted_content_tv"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
-                                <TextView
-                                    android:id="@+id/comment_retweeted_message_tv"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                                <android.support.v7.widget.GridLayout
-                                    android:id="@+id/comment_retweeted_gridlayout_main"
-                                    android:visibility="gone"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:columnCount="3">
-                                    <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                                        xmlns:android="http://schemas.android.com/apk/res/android"
-                                        android:id="@+id/comment_retweeted_image_view"
-                                        android:layout_width="0dp"
-                                        android:layout_height="100dp"
-                                        android:layout_margin="1dp"
-                                        android:scaleType="centerCrop"
-                                        app:layout_columnWeight="1"
-                                        />
 
-                                </android.support.v7.widget.GridLayout>
-
-                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
 
             </LinearLayout>
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/comment_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:titleTextColor="#ffffff"
-                app:theme="@style/ToolbarTheme"
-                android:gravity="center_vertical"
                 android:background="#00ffffff"
-                app:navigationIcon="@drawable/back"
+                android:gravity="center_vertical"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                app:navigationIcon="@drawable/back"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:theme="@style/ToolbarTheme"
+                app:titleTextColor="#ffffff" />
         </android.support.design.widget.CollapsingToolbarLayout>
-
 
 
         <android.support.design.widget.TabLayout
@@ -174,4 +183,32 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:translationZ="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/comment_post_comment_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="说点什么吧..." />
+
+        <ImageView
+            android:id="@+id/comments_reposts_image_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btn_repeat_normal_meitu_1" />
+
+        <ImageView
+            android:id="@+id/comment_like_image_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_menu_share" />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

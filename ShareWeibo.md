@@ -149,3 +149,4 @@ MVP：
 
 BuildConfig里添加AppKey重要信息
 
+- 尝试封装自己的okhttp来简化操作

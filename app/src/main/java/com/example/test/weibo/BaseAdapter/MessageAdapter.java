@@ -131,7 +131,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 public void onClick(View view) {
                     Intent intent = new Intent(context, CommentsMainActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("message", message);
+                    bundle.putParcelable("message", message);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
@@ -183,5 +183,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             Log.d("gridlayoutwidth", String.valueOf(gridlayout.getWidth()));
             gridlayout.addView(imageView, layoutParams);
         }
+    }
+
+    public void setMessageArrayList(ArrayList<Message> messageArrayList) {
+        this.messageArrayList = messageArrayList;
     }
 }

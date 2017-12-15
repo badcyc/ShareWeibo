@@ -1,12 +1,15 @@
 package com.example.test.weibo.Comments.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +18,8 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.test.BaseModel.Utils;
 import com.example.test.weibo.Comments.Bean.CommentData;
 import com.example.test.R;
+import com.example.test.weibo.Comments.View.CommentsMainActivity;
+import com.example.test.weibo.Comments.View.PostCommentActivity;
 
 import java.util.ArrayList;
 
@@ -46,6 +51,7 @@ public class ComentRepostAdapter extends RecyclerView.Adapter<ComentRepostAdapte
         @BindView(R.id.comment_content_tv)
         TextView comment_content_tv;
 
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -70,7 +76,7 @@ public class ComentRepostAdapter extends RecyclerView.Adapter<ComentRepostAdapte
 
         if (commentDataArrayList != null) {
           /*  Message message = (Message) messageArrayList.get(position);*/
-            CommentData message = commentDataArrayList.get(position);
+            final CommentData message = commentDataArrayList.get(position);
             Log.d("contentText_adapter:", message.getContent());
             holder.comment_content_tv.setText(message.getContent());
             String source = Utils.getSource(message.getSource_url());

@@ -26,6 +26,7 @@ import com.example.test.View.Fragments.PrivateMessagesFragment;
 import com.example.test.weibo.dialog.DialogMy;
 import com.example.test.weibo.dialog.MyDialog;
 import com.example.test.weibo.weibomessages.AllWeiboMessages.View.AllWeiboFragment;
+import com.example.test.weibo.weibomessages.PrivateWeiboMessages.View.MyWeiboFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,DialogMy.OnRadioButtonClickListener{
+        implements NavigationView.OnNavigationItemSelectedListener, DialogMy.OnRadioButtonClickListener {
 
     @BindView(R.id.label_view)
     TextView labelView;
@@ -178,18 +179,42 @@ public class MainActivity extends AppCompatActivity
 
     @OnClick(R.id.label_view)
     public void onClick() {
-        List<String> group=new ArrayList<>();
+        List<String> group = new ArrayList<>();
         group.add("全部微博");
         group.add("我的微博");
-        DialogMy dialogMy=new DialogMy.Builder(MainActivity.this)
+        DialogMy dialogMy = new DialogMy.Builder(MainActivity.this)
                 .setOnItemClickListener(this)
                 .setRadioGroup(group)
+                .setOnSelectedButton(labelView.getText().toString())
                 .create();
+
         dialogMy.show();
     }
 
     @Override
     public void onRadioButtonSelected(String name) {
         labelView.setText(name);
+        switch (name) {
+            case "我的微博":
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content, new MyWeiboFragment());
+                fragmentTransaction.commit();
+                break;
+
+            case "全部微博":
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content, new AllWeiboFragment());
+                fragmentTransaction.commit();
+                break;
+
+            case "好友圈":
+
+                break;
+            case "特别关注":
+
+                break;
+            default:
+                break;
+        }
     }
 }

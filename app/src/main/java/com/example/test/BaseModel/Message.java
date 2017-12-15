@@ -1,5 +1,8 @@
 package com.example.test.BaseModel;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.test.BaseModel.User.User;
 
 import java.io.Serializable;
@@ -9,7 +12,7 @@ import java.util.ArrayList;
  * Created by cyc20 on 2017/11/28.
  */
 
-public class Message implements Serializable {
+public class Message implements Parcelable {
     private String created_at;
     private String id;
     private String mid;
@@ -35,6 +38,7 @@ public class Message implements Serializable {
 
     public Message(String created_at, String id, String contentText, String source_url, User user,
                    String reposts_count, String comments_count, String attitudes_count, Message retweeted_status) {
+        super();
         this.contentText = contentText;
         this.id = id;
         this.created_at = created_at;
@@ -206,4 +210,71 @@ public class Message implements Serializable {
         return reposts_count;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.created_at);
+        dest.writeString(this.id);
+        dest.writeString(this.mid);
+        dest.writeByte(this.can_edit ? (byte) 1 : (byte) 0);
+        dest.writeString(this.idstr);
+        dest.writeString(this.contentText);
+        dest.writeInt(this.source_type);
+        dest.writeString(this.source_url);
+        dest.writeByte(this.favorited ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.truncated ? (byte) 1 : (byte) 0);
+        dest.writeString(this.in_reply_to_status_id);
+        dest.writeString(this.in_reply_to_user_id);
+        dest.writeString(this.in_reply_to_screen_name);
+        dest.writeString(this.geo);
+        dest.writeByte(this.is_paid ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.mblog_vip_type);
+        dest.writeStringList(this.pic_urls);
+        dest.writeInt(this.reposts_count);
+        dest.writeInt(this.comments_count);
+        dest.writeInt(this.attitudes_count);
+        dest.writeParcelable(this.user,flags);
+        dest.writeParcelable(this.retweeted_status, flags);
+    }
+
+    protected Message(Parcel in) {
+        this.created_at = in.readString();
+        this.id = in.readString();
+        this.mid = in.readString();
+        this.can_edit = in.readByte() != 0;
+        this.idstr = in.readString();
+        this.contentText = in.readString();
+        this.source_type = in.readInt();
+        this.source_url = in.readString();
+        this.favorited = in.readByte() != 0;
+        this.truncated = in.readByte() != 0;
+        this.in_reply_to_status_id = in.readString();
+        this.in_reply_to_user_id = in.readString();
+        this.in_reply_to_screen_name = in.readString();
+        this.geo = in.readString();
+        this.is_paid = in.readByte() != 0;
+        this.mblog_vip_type = in.readInt();
+        this.pic_urls = in.createStringArrayList();
+        this.reposts_count = in.readInt();
+        this.comments_count = in.readInt();
+        this.attitudes_count = in.readInt();
+        this.user =  in.readParcelable(User.class.getClassLoader());
+        this.retweeted_status = in.readParcelable(Message.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Message> CREATOR = new Parcelable.Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel source) {
+            return new Message(source);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
 }

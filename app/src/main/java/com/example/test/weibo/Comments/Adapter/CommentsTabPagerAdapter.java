@@ -61,3 +61,4 @@ public class CommentsTabPagerAdapter extends FragmentPagerAdapter {
         return list;
     }
 }
+

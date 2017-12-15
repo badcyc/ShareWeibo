@@ -1,5 +1,6 @@
 package com.example.test.weibo.Comments.View;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -74,7 +76,12 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
     AppBarLayout commentAppbar;
     @BindView(R.id.comment_viewpager)
     ViewPager commentViewpager;
-
+    @BindView(R.id.comment_post_comment_tv)
+    TextView commentPostCommentTv;
+    @BindView(R.id.comment_like_image_view)
+    ImageView commentLikeImageView;
+    @BindView(R.id.comments_reposts_image_view)
+    ImageView commentRepostsImageView;
 
     private CommentsTabPagerAdapter adapter;
 
@@ -90,7 +97,7 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comment_activity_main);
         ButterKnife.bind(this);
-        message = (Message) getIntent().getSerializableExtra("message");
+        message = (Message) getIntent().getParcelableExtra("message");
         setTitle("返回");
         commentCollapsingToolbar.setTitle("返回");
         commentCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
@@ -132,6 +139,20 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
                 commentRetweetedContentTv.setText(message.getRetweeted_status().getText());
                 //               comment_retweeted_message_tv.setText(message.getRetweeted_status().getAttitudes_count());
             }
+
+            commentPostCommentTv.setClickable(true);
+            commentPostCommentTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(CommentsMainActivity.this, PostCommentActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putParcelable("message",message);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+            commentLikeImageView.setClickable(true);
+            commentRepostsImageView.setClickable(true);
 
         }
     }

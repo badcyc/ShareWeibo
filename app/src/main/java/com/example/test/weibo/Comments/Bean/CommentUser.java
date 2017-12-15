@@ -1,12 +1,15 @@
 package com.example.test.weibo.Comments.Bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by cyc20 on 2017/12/8.
  */
 
-public class CommentUser implements Serializable {
+public class CommentUser implements Parcelable {
     private String id;
     private String name;
     private String avatar_hd;
@@ -40,4 +43,34 @@ public class CommentUser implements Serializable {
     public String getId() {
         return id;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.avatar_hd);
+    }
+
+    protected CommentUser(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.avatar_hd = in.readString();
+    }
+
+    public static final Parcelable.Creator<CommentUser> CREATOR = new Parcelable.Creator<CommentUser>() {
+        @Override
+        public CommentUser createFromParcel(Parcel source) {
+            return new CommentUser(source);
+        }
+
+        @Override
+        public CommentUser[] newArray(int size) {
+            return new CommentUser[size];
+        }
+    };
 }

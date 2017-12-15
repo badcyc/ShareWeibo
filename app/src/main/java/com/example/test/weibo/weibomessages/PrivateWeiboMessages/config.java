@@ -1,4 +1,4 @@
-package com.example.test.weibo.weibomessages.MyWeiboMessages;
+package com.example.test.weibo.weibomessages.PrivateWeiboMessages;
 
 /**
  * Created by cyc20 on 2017/12/12.

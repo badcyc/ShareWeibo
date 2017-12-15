@@ -4,9 +4,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+
     <string name="title_home">微博</string>
     <string name="title_dashboard">私信</string>
     <string name="title_notifications">热门</string>
     <string name="login">添加账号</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_send_timing">定时发送</string>
+    <string name="action_send_cancel">取消发送</string>
+    <string name="action_weibo_from">微博来源</string>
 </resources>

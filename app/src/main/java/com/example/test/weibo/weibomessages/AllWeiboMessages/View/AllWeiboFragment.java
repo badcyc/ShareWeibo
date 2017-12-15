@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 
 
 import com.example.test.BaseModel.Message;
+import com.example.test.BaseModel.OkHttpCallBack;
+import com.example.test.BaseModel.OkHttpUtil;
+import com.example.test.BaseModel.ParseResponseUtil;
 import com.example.test.BaseModel.Utils;
 
 import com.example.test.R;
@@ -23,6 +26,7 @@ import com.example.test.weibo.BaseAdapter.MessageAdapter;
 import com.example.test.weibo.Utils.GetLists;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +35,7 @@ import butterknife.ButterKnife;
  * Created by cyc20 on 2017/11/29.
  */
 
-public class AllWeiboFragment extends Fragment {
+public class AllWeiboFragment extends Fragment implements OkHttpCallBack{
     private static final String ARG_PARAM1 = "param1";
     private int progress;
     private Context context = null;
@@ -82,10 +86,11 @@ public class AllWeiboFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weibo, null);
-        initDate();
-        adapter = new MessageAdapter(lists, context);
-        Log.d("adapter:", "finish");
         ButterKnife.bind(this,view);
+        adapter = new MessageAdapter(lists, context);
+        initDate();
+        Log.d("adapter:", "finish");
+
 
 
         recyclerView.setAdapter(adapter);
@@ -110,8 +115,14 @@ public class AllWeiboFragment extends Fragment {
 
 
     private synchronized void initDate() {
-        lists = GetLists.getList(handler, Utils.getContentUrl);
-
+       // lists = GetLists.getList(handler, Utils.getContentUrl);
+        HashMap<String,String> params=new HashMap<>();
+        params.put("count","20");
+        OkHttpUtil  okHttpUtil=new OkHttpUtil.Builder()
+                .setCallBack(this)
+                .setParams(params)
+                .setUrl(Utils.getContentUrl)
+                .create();
     }
 
 
@@ -125,5 +136,10 @@ public class AllWeiboFragment extends Fragment {
         super.onResume();
     }
 
-
+    @Override
+    public void getData(String response) {
+        lists=ParseResponseUtil.parseWeiboResponse(response,handler);
+        adapter.setMessageArrayList(lists);
+        handler.sendEmptyMessage(1);
+    }
 }
