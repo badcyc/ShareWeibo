@@ -45,6 +45,7 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
 
     Message message;
 
+    private int fromState;
 
     @BindView(R.id.comment_pic_iv)
     CircleImageView commentPicIv;
@@ -98,7 +99,8 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
         setContentView(R.layout.comment_activity_main);
         ButterKnife.bind(this);
         message = (Message) getIntent().getParcelableExtra("message");
-        setTitle("返回");
+        fromState=getIntent().getIntExtra("state",0);
+        //setTitle("返回");
         commentCollapsingToolbar.setTitle("返回");
         commentCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
         commentCollapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
@@ -112,7 +114,21 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
         if (getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        if (fromState!=0){
+            commentAppbar.setExpanded(false);
+            if (fromState==2){
+                commentTabLayout.getTabAt(1).select();
+                commentViewpager.setCurrentItem(1);
+            }
+        }
+        commentToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
+
 
     private void initView() {
         if (message != null) {

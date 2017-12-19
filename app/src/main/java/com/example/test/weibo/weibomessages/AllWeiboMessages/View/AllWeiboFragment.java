@@ -90,9 +90,6 @@ public class AllWeiboFragment extends Fragment implements OkHttpCallBack{
         adapter = new MessageAdapter(lists, context);
         initDate();
         Log.d("adapter:", "finish");
-
-
-
         recyclerView.setAdapter(adapter);
 
         Log.d("recyclerView:", "finish");

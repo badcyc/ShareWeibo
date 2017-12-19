@@ -33,8 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by cyc20 on 2017/11/29.
  */
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
-
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>{
     private ArrayList messageArrayList = new ArrayList();
     private Context context;
 
@@ -132,12 +131,27 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                     Intent intent = new Intent(context, CommentsMainActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("message", message);
+                    bundle.putInt("state",0);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
+
+            holder.comments_count_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, CommentsMainActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("message", message);
+                    bundle.putInt("state",2);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });
         }
     }
+
+
 
     @Override
     public int getItemCount() {

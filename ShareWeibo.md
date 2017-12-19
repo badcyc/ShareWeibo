@@ -150,3 +150,9 @@ MVP：
 BuildConfig里添加AppKey重要信息
 
 - 尝试封装自己的okhttp来简化操作
+
+#### 12月20号
+
+学习BaseFragment和BaseActivity的封装
+
+下一步学习MVP+OKHTTP+rxjava完全整改整个项目

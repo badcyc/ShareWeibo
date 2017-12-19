@@ -52,7 +52,10 @@ public class MainActivity extends AppCompatActivity
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //      mTextMessage.setText(R.string.title_notifications);
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content, new AllWeiboFragment());
+                    Log.d("fragment:", "finish");
+                    fragmentTransaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
                     fragmentTransaction = fragmentManager.beginTransaction();
@@ -61,10 +64,6 @@ public class MainActivity extends AppCompatActivity
                     fragmentTransaction.commit();
                     return true;
                 case R.id.navigation_notifications:
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content, new AllWeiboFragment());
-                    Log.d("fragment:", "finish");
-                    fragmentTransaction.commit();
                     return true;
             }
             return false;
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

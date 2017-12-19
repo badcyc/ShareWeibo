@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.test.BaseModel.Utils;
+import com.example.test.ui.SupportFragment;
 import com.example.test.weibo.Comments.Adapter.ComentRepostAdapter;
 import com.example.test.weibo.Comments.Bean.CommentData;
 import com.example.test.R;
@@ -27,16 +28,16 @@ import static com.example.test.weibo.Comments.Bean.Utils.getCommentRepostData;
  * Created by cyc20 on 2017/12/7.
  */
 
-public class ForwardedFragment extends Fragment {
-
-
+public class ForwardedFragment extends SupportFragment {
     private String id;
-    private ArrayList<CommentData> dataList=new ArrayList<>();
-    @BindView(R.id.mrecyclerview) RecyclerView mRecyclerView;
+    private ArrayList<CommentData> dataList = new ArrayList<>();
+    @BindView(R.id.mrecyclerview)
+    RecyclerView mRecyclerView;
     private Context context;
     private int mPage;
     public static final String MERCHANT_DETAILS_PAGE = "MERCHANT_DETAILS_PAGE";
     private ComentRepostAdapter mAdapter;
+
     public static ForwardedFragment newInstance(int page,String id){
         Bundle args=new Bundle();
         args.putInt(MERCHANT_DETAILS_PAGE,page);
@@ -51,16 +52,28 @@ public class ForwardedFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mPage=getArguments().getInt(MERCHANT_DETAILS_PAGE);
         id=getArguments().getString("id");
-        context=getActivity().getApplicationContext();
-
+        // context=getActivity().getApplicationContext();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+        context=getActivity();
         View view=inflater.inflate(R.layout.forwardedfragment_main,container,false);
-        ButterKnife.bind(this,view);
-        switch (mPage){
+        return view;
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        dataList = getCommentRepostData(Utils.getCommentsDataUrl, id);
+    }
+
+    @Override
+    protected void initWidget(View parentView) {
+        super.initWidget(parentView);
+        ButterKnife.bind(this,parentView);
+        //mRecyclerView=(RecyclerView)parentView.findViewById(R.id.mrecyclerview);
+        switch (mPage) {
             case 0:
                 initDate();
                 initAdapter(dataList);
@@ -75,18 +88,18 @@ public class ForwardedFragment extends Fragment {
                 break;
 
         }
-        return view;
-
     }
     private synchronized void initDate(){
         dataList= getCommentRepostData(Utils.getCommentsDataUrl,id);
     }
     private void initAdapter(ArrayList<CommentData> data) {
         //mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new ComentRepostAdapter(getActivity(),data);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mAdapter = new ComentRepostAdapter(context,data);
 
         mRecyclerView.setAdapter(mAdapter);//设置adapter
         //设置item点击事件
     }
+
+
 }

@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.test.R;
+import com.example.test.ui.SupportFragment;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by cyc20 on 2017/12/14.
  */
 
-public class EmojiPagerFragment extends Fragment {
+public class EmojiPagerFragment extends SupportFragment {
 
     private String id;
     //private ArrayList<CommentData> dataList=new ArrayList<>();
@@ -39,7 +40,6 @@ public class EmojiPagerFragment extends Fragment {
     private int mPage;
     public static final String MERCHANT_DETAILS_PAGE = "MERCHANT_DETAILS_PAGE";
 
-    //private ComentRepostAdapter mAdapter;
     public static EmojiPagerFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(MERCHANT_DETAILS_PAGE, page);
@@ -53,16 +53,20 @@ public class EmojiPagerFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(MERCHANT_DETAILS_PAGE);
-        // id=getArguments().getString("id");
-        context = getActivity().getApplicationContext();
 
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected View inflaterView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+        context = getActivity();
         View view = inflater.inflate(R.layout.emoji_gridview_main, container, false);
-        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    protected void initWidget(View parentView) {
+        super.initWidget(parentView);
+        ButterKnife.bind(this, parentView);
         switch (mPage) {
             case 0:
                 initAdapter(1);
@@ -79,21 +83,8 @@ public class EmojiPagerFragment extends Fragment {
             default:
                 break;
         }
-        return view;
-
     }
 
-    /*private synchronized void initDate(){
-        dataList= getCommentRepostData(Utils.getCommentsDataUrl,id);
-    }*/
-  /*  private void initAdapter(ArrayList<CommentData> data) {
-        //mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new ComentRepostAdapter(getActivity(),data);
-
-        mRecyclerView.setAdapter(mAdapter);//设置adapter
-        //设置item点击事件
-    }*/
     private void initAdapter(int page) {
         final EmojiFaceAdapter emojiFaceAdapter = new EmojiFaceAdapter(context, page);
         emojiGridView.setAdapter(emojiFaceAdapter);
