@@ -1,4 +1,4 @@
-package com.example.test.ui;
+package com.example.test.base.ui;
 
 /**
  * Created by cyc20 on 2017/12/19.

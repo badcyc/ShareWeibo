@@ -22,9 +22,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.View.Fragments.PrivateMessagesFragment;
+import com.example.test.navigation.privatemessage.view.PrivateMessagesFragment;
 import com.example.test.weibo.dialog.DialogMy;
-import com.example.test.weibo.dialog.MyDialog;
 import com.example.test.weibo.weibomessages.AllWeiboMessages.View.AllWeiboFragment;
 import com.example.test.weibo.weibomessages.PrivateWeiboMessages.View.MyWeiboFragment;
 

@@ -3,11 +3,11 @@ package com.example.test.weibo.Utils;
 import android.os.Handler;
 import android.util.Log;
 
-import com.example.test.BaseModel.GetMessagesFromPhone;
-import com.example.test.BaseModel.Message;
-import com.example.test.BaseModel.SaveMessagesToPhone;
-import com.example.test.BaseModel.User.SavedUser;
-import com.example.test.BaseModel.User.User;
+import com.example.test.navigation.accountmanagement.Utils.GetMessagesFromPhone;
+import com.example.test.weibo.weibomessages.messagebean.Message;
+import com.example.test.navigation.accountmanagement.Utils.SaveMessagesToPhone;
+import com.example.test.navigation.accountmanagement.bean.SavedUser;
+import com.example.test.navigation.accountmanagement.bean.User;
 import com.example.test.BaseModel.Utils;
 
 import org.json.JSONArray;

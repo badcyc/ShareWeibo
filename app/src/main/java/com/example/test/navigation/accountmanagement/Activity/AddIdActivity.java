@@ -18,8 +18,8 @@ import android.widget.LinearLayout;
 
 
 import com.example.test.navigation.accountmanagement.Adapters.AddIdAdapter;
-import com.example.test.BaseModel.GetMessagesFromPhone;
-import com.example.test.BaseModel.User.SavedUser;
+import com.example.test.navigation.accountmanagement.Utils.GetMessagesFromPhone;
+import com.example.test.navigation.accountmanagement.bean.SavedUser;
 import com.example.test.R;
 
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.example.test.ui;
+package com.example.test.base.ui;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

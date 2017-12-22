@@ -1,4 +1,4 @@
-package com.example.test.BaseModel.User;
+package com.example.test.navigation.accountmanagement.bean;
 
 /**
  * Created by cyc20 on 2017/12/3.

@@ -1,6 +1,7 @@
-package com.example.test.BaseModel;
+package com.example.test.navigation.accountmanagement.Utils;
 
-import com.example.test.BaseModel.User.SavedUser;
+import com.example.test.BaseModel.Utils;
+import com.example.test.navigation.accountmanagement.bean.SavedUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;

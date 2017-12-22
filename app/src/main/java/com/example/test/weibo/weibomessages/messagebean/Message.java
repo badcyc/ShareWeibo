@@ -1,11 +1,10 @@
-package com.example.test.BaseModel;
+package com.example.test.weibo.weibomessages.messagebean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.test.BaseModel.User.User;
+import com.example.test.navigation.accountmanagement.bean.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

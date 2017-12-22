@@ -1,16 +1,14 @@
 package com.example.test.weibo.dialog;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.test.BaseModel.GroupMessage.GroupMessage;
+import com.example.test.weibo.dialog.bean.GroupMessage;
 import com.example.test.R;
 
 import java.util.ArrayList;

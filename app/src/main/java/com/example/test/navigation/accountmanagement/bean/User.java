@@ -1,9 +1,7 @@
-package com.example.test.BaseModel.User;
+package com.example.test.navigation.accountmanagement.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.io.Serializable;
 
 /**
  * Created by cyc20 on 2017/11/29.

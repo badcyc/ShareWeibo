@@ -30,11 +30,11 @@
 
         </activity>
 
-        <activity android:name=".weibo.Comments.View.CommentsMainActivity"
+        <activity android:name=".weibo.Comments.View.CommentMainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".weibo.Comments.View.PostCommentActivity"
+        <activity android:name=".weibo.Comments.View.PostCommentActivityTest"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

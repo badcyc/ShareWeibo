@@ -1,5 +1,7 @@
 package com.example.test.BaseModel;
 
+import com.example.test.weibo.weibomessages.messagebean.Message;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

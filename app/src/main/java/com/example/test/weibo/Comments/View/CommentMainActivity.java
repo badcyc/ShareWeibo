@@ -3,20 +3,16 @@ package com.example.test.weibo.Comments.View;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,10 +20,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.BaseModel.Message;
+import com.example.test.weibo.weibomessages.messagebean.Message;
 import com.example.test.BaseModel.Utils;
-import com.example.test.weibo.Comments.Adapter.CommentsTabPagerAdapter;
 import com.example.test.R;
+import com.example.test.base.ui.SupportActivity;
+import com.example.test.weibo.Comments.Adapter.CommentsTabPagerAdapter;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,12 +33,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.test.weibo.BaseAdapter.MessageAdapter.updateViewGroup;
 
-
 /**
- * Created by cyc20 on 2017/12/8.
+ * Created by cyc20 on 2017/12/21.
  */
 
-public class CommentsMainActivity extends AppCompatActivity implements CommentsTabPagerAdapter.TabPagerListener {
+public class CommentMainActivity extends SupportActivity implements CommentsTabPagerAdapter.TabPagerListener{
 
 
     Message message;
@@ -83,27 +80,16 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
     ImageView commentLikeImageView;
     @BindView(R.id.comments_reposts_image_view)
     ImageView commentRepostsImageView;
-
     private CommentsTabPagerAdapter adapter;
+    @Override
+    public void setRootView() {
+        setContentView(R.layout.comment_activity_main);
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.comment_activity_main);
+    public void initWidget() {
+        super.initWidget();
         ButterKnife.bind(this);
-        message = (Message) getIntent().getParcelableExtra("message");
-        fromState=getIntent().getIntExtra("state",0);
-        //setTitle("返回");
-        commentCollapsingToolbar.setTitle("返回");
-        commentCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
-        commentCollapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
         initView();
         adapter = new CommentsTabPagerAdapter(getSupportFragmentManager()
                 , 3, message, this);
@@ -127,13 +113,21 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
                 finish();
             }
         });
+        //setTitle("返回");
+        commentCollapsingToolbar.setTitle("返回");
+        commentCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
+        commentCollapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
     }
 
-
+    @Override
+    public void initData() {
+        message =  getIntent().getParcelableExtra("message");
+        fromState=getIntent().getIntExtra("state",0);
+    }
     private void initView() {
         if (message != null) {
             commentNameTv.setText(message.getUser().getName());
-            Glide.with(CommentsMainActivity.this)
+            Glide.with(CommentMainActivity.this)
                     .load(message.getUser().getAvatar_hd())
                     .asBitmap()
                     .into(new SimpleTarget<Bitmap>() {
@@ -143,11 +137,11 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
                         }
                     });
             commentTimeTv.setText(Utils.parseTime(message.getCreated_at()));
-          //  commentFromTv.setText(Utils.getSource(message.getSource_url()));
+            //  commentFromTv.setText(Utils.getSource(message.getSource_url()));
             commentContentTv.setText(message.getText());
             if (message.getPic_urls().size() > 0) {
                 commentGridlayoutMain.setVisibility(View.VISIBLE);
-                updateViewGroup(message.getPic_urls(), commentGridlayoutMain, CommentsMainActivity.this);
+                updateViewGroup(message.getPic_urls(), commentGridlayoutMain, CommentMainActivity.this);
                 Log.d("pics", "load");
             }
             if (message.getRetweeted_status() != null) {
@@ -160,7 +154,7 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
             commentPostCommentTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(CommentsMainActivity.this, PostCommentActivity.class);
+                    Intent intent=new Intent(CommentMainActivity.this, PostCommentActivityTest.class);
                     Bundle bundle=new Bundle();
                     bundle.putParcelable("message",message);
                     intent.putExtras(bundle);
@@ -175,6 +169,7 @@ public class CommentsMainActivity extends AppCompatActivity implements CommentsT
 
     @Override
     public Fragment getFragment(int position, String id) {
-        return ForwardedFragment.newInstance(position, id);
+        return ForwardedFragment.newInstance(position,id);
     }
+
 }

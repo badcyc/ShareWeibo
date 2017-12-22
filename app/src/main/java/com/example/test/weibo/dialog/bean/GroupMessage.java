@@ -1,4 +1,4 @@
-package com.example.test.BaseModel.GroupMessage;
+package com.example.test.weibo.dialog.bean;
 
 import java.util.ArrayList;
 

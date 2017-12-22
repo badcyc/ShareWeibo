@@ -1,13 +1,9 @@
 package com.example.test.weibo.Comments.View;
 
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -20,14 +16,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.BaseModel.Message;
+import com.example.test.weibo.weibomessages.messagebean.Message;
 import com.example.test.R;
-import com.example.test.weibo.Comments.Bean.CommentData;
-import com.example.test.weibo.emoji.EmojiFaceAdapter;
+import com.example.test.base.ui.SupportActivity;
 import com.example.test.weibo.emoji.EmojiPagerAdapter;
 import com.example.test.weibo.emoji.EmojiPagerFragment;
 
@@ -37,11 +31,10 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by cyc20 on 2017/12/13.
+ * Created by cyc20 on 2017/12/23.
  */
 
-public class PostCommentActivity extends AppCompatActivity implements EmojiPagerAdapter.EmojiTabPagerListener {
-
+public class PostCommentActivityTest extends SupportActivity implements EmojiPagerAdapter.EmojiTabPagerListener{
     Message message;
     private EmojiPagerAdapter emojiPagerAdapter;
     private boolean emojiKeyboardState = false;
@@ -74,24 +67,27 @@ public class PostCommentActivity extends AppCompatActivity implements EmojiPager
     ViewPager emojiViewPager;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setRootView() {
+        super.setRootView();
         setContentView(R.layout.activity_post_comment_main);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        message = getIntent().getParcelableExtra("message");
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
         ButterKnife.bind(this);
         setSupportActionBar(postCommentToolbar);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
         screenheight = this.getWindowManager().getDefaultDisplay().getHeight();
         keyheight = screenheight / 3;
-        initData();
-        initView();
-    }
 
-    public void initData() {
-        message = getIntent().getParcelableExtra("message");
-    }
-
-    public void initView() {
         Glide.with(this)
                 .load(message.getUser().getAvatar_hd())
                 .asBitmap().into(new SimpleTarget<Bitmap>() {
@@ -101,9 +97,12 @@ public class PostCommentActivity extends AppCompatActivity implements EmojiPager
             }
         });
         postCommentName.setText(message.getUser().getName());
-
     }
 
+    @Override
+    public Fragment getFragment(int position) {
+        return EmojiPagerFragment.newInstance(position);
+    }
     @OnClick({R.id.post_comment_edit_text, R.id.post_comment_camera, R.id.post_comment_call, R.id.post_comment_search,
             R.id.post_comment_emotion, R.id.post_comment_send})
     public void onClick(View view) {
@@ -148,12 +147,6 @@ public class PostCommentActivity extends AppCompatActivity implements EmojiPager
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return super.onKeyDown(keyCode, event);
     }
-
-    @Override
-    public Fragment getFragment(int position) {
-        return EmojiPagerFragment.newInstance(position);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_post_comment_main, menu);
@@ -175,4 +168,5 @@ public class PostCommentActivity extends AppCompatActivity implements EmojiPager
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

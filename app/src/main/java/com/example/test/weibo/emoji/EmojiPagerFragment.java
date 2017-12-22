@@ -5,9 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayout;
-import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
@@ -18,9 +15,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.test.R;
-import com.example.test.ui.SupportFragment;
-
-import java.util.ArrayList;
+import com.example.test.base.ui.SupportFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

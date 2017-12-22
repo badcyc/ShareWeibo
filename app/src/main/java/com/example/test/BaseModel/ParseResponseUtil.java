@@ -3,7 +3,8 @@ package com.example.test.BaseModel;
 import android.os.Handler;
 import android.util.Log;
 
-import com.example.test.BaseModel.User.User;
+import com.example.test.navigation.accountmanagement.bean.User;
+import com.example.test.weibo.weibomessages.messagebean.Message;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  */
 
 public class ParseResponseUtil {
-    public static ArrayList<Message> parseWeiboResponse(String responsedata,Handler handler) {
+    public static ArrayList<Message> parseWeiboResponse(String responsedata, Handler handler) {
         ArrayList<Message> messages=new ArrayList<>();
         try {
             JSONObject jsonObject = new JSONObject(responsedata);

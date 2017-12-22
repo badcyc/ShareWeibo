@@ -1,4 +1,4 @@
-package com.example.test.View.Fragments;
+package com.example.test.navigation.privatemessage.view;
 
 import android.app.Activity;
 import android.content.Context;

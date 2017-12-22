@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.example.test.BaseModel.Message;
+import com.example.test.weibo.weibomessages.messagebean.Message;
 import com.example.test.BaseModel.OkHttpCallBack;
 import com.example.test.BaseModel.OkHttpUtil;
 import com.example.test.BaseModel.ParseResponseUtil;
@@ -23,7 +23,6 @@ import com.example.test.BaseModel.Utils;
 
 import com.example.test.R;
 import com.example.test.weibo.BaseAdapter.MessageAdapter;
-import com.example.test.weibo.Utils.GetLists;
 
 import java.util.ArrayList;
 import java.util.HashMap;

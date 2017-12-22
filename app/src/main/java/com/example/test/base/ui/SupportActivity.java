@@ -1,26 +1,22 @@
-package com.example.test;
+package com.example.test.base.ui;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.test.ui.ActivityStack;
-import com.example.test.ui.AnnotateUtil;
-import com.example.test.ui.I_Activity;
-import com.example.test.ui.SupportFragment;
-
 import java.lang.ref.SoftReference;
+
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by cyc20 on 2017/12/20.
  */
 
-public class SupportActivity extends AppCompatActivity implements View.OnClickListener,I_Activity {
+public class SupportActivity extends AppCompatActivity implements View.OnClickListener, I_Activity {
     public static final int WHICH_MSG = 0X37210;
-
+    private CompositeSubscription compositeSubscription;
     public Activity aty;
 
     protected SupportFragment currentKJFragment;
@@ -72,6 +68,7 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
             }
         };
     }
+
     @Override
     public void initData() {
     }
@@ -79,6 +76,7 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void initWidget() {
     }
+
     private void initializer() {
         new Thread(new Runnable() {
             @Override
@@ -90,6 +88,7 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
         initData();
         initWidget();
     }
+
     @Override
     public void widgetClick(View v) {
     }
@@ -113,6 +112,12 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
         return view;
     }
 
+    public void onUnsubscribe(){
+        if(compositeSubscription!=null){
+            compositeSubscription = new CompositeSubscription();
+            compositeSubscription.unsubscribe();
+        }
+    }
 
     /***************************************************************************
      * print Activity callback methods
@@ -121,7 +126,7 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         aty = this;
         ActivityStack.create().addActivity(this);
-       // KJLoger.state(this.getClass().getName(), "---------onCreat ");
+        // KJLoger.state(this.getClass().getName(), "---------onCreat ");
         super.onCreate(savedInstanceState);
 
         setRootView(); // 必须放在annotate之前调用
@@ -138,39 +143,39 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onStart() {
         super.onStart();
-       // KJLoger.state(this.getClass().getName(), "---------onStart ");
+        // KJLoger.state(this.getClass().getName(), "---------onStart ");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         activityState = RESUME;
-       // KJLoger.state(this.getClass().getName(), "---------onResume ");
+        // KJLoger.state(this.getClass().getName(), "---------onResume ");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         activityState = PAUSE;
-       // KJLoger.state(this.getClass().getName(), "---------onPause ");
+        // KJLoger.state(this.getClass().getName(), "---------onPause ");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         activityState = STOP;
-       // KJLoger.state(this.getClass().getName(), "---------onStop ");
+        // KJLoger.state(this.getClass().getName(), "---------onStop ");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-       // KJLoger.state(this.getClass().getName(), "---------onRestart ");
+        // KJLoger.state(this.getClass().getName(), "---------onRestart ");
     }
 
     @Override
     protected void onDestroy() {
-       // unRegisterBroadcast();
+        // unRegisterBroadcast();
         activityState = DESTROY;
         //KJLoger.state(this.getClass().getName(), "---------onDestroy ");
         super.onDestroy();
@@ -180,6 +185,7 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
         callback = null;
         threadHandle = null;
         aty = null;
+        onUnsubscribe();
     }
    /* public void changeFragment(int resView, SupportFragment targetFragment) {
         if (targetFragment.equals(currentKJFragment)) {
@@ -202,6 +208,7 @@ public class SupportActivity extends AppCompatActivity implements View.OnClickLi
         transaction.commit();
     }
 */
+
     /**
      * 用Fragment替换视图
      *

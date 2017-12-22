@@ -2,7 +2,7 @@ package com.example.test.weibo.Comments.Bean;
 
 import android.util.Log;
 
-import com.example.test.BaseModel.User.User;
+import com.example.test.navigation.accountmanagement.bean.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;

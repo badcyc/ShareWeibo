@@ -1,4 +1,4 @@
-package com.example.test.ui;
+package com.example.test.base.ui;
 
 import android.app.Activity;
 import android.content.Context;

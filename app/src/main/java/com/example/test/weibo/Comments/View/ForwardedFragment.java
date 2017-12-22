@@ -4,7 +4,6 @@ package com.example.test.weibo.Comments.View;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.test.BaseModel.Utils;
-import com.example.test.ui.SupportFragment;
+import com.example.test.base.ui.SupportFragment;
 import com.example.test.weibo.Comments.Adapter.ComentRepostAdapter;
 import com.example.test.weibo.Comments.Bean.CommentData;
 import com.example.test.R;
@@ -28,7 +27,7 @@ import static com.example.test.weibo.Comments.Bean.Utils.getCommentRepostData;
  * Created by cyc20 on 2017/12/7.
  */
 
-public class ForwardedFragment extends SupportFragment {
+public class ForwardedFragment extends SupportFragment implements CommentsView{
     private String id;
     private ArrayList<CommentData> dataList = new ArrayList<>();
     @BindView(R.id.mrecyclerview)
@@ -91,6 +90,7 @@ public class ForwardedFragment extends SupportFragment {
     }
     private synchronized void initDate(){
         dataList= getCommentRepostData(Utils.getCommentsDataUrl,id);
+
     }
     private void initAdapter(ArrayList<CommentData> data) {
         //mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
@@ -101,5 +101,13 @@ public class ForwardedFragment extends SupportFragment {
         //设置item点击事件
     }
 
+    @Override
+    public void success(CommentData model) {
 
+    }
+
+    @Override
+    public void error(int code, String msg) {
+
+    }
 }

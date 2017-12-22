@@ -17,9 +17,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.test.BaseModel.Message;
+import com.example.test.weibo.weibomessages.messagebean.Message;
 import com.example.test.BaseModel.Utils;
-import com.example.test.weibo.Comments.View.CommentsMainActivity;
+import com.example.test.weibo.Comments.View.CommentMainActivity;
 import com.example.test.R;
 
 import java.util.ArrayList;
@@ -128,7 +128,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CommentsMainActivity.class);
+                    Intent intent = new Intent(context, CommentMainActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("message", message);
                     bundle.putInt("state",0);
@@ -140,7 +140,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.comments_count_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CommentsMainActivity.class);
+                    Intent intent = new Intent(context, CommentMainActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("message", message);
                     bundle.putInt("state",2);

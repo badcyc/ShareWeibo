@@ -18,8 +18,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.test.BaseModel.Utils;
 import com.example.test.weibo.Comments.Bean.CommentData;
 import com.example.test.R;
-import com.example.test.weibo.Comments.View.CommentsMainActivity;
-import com.example.test.weibo.Comments.View.PostCommentActivity;
+
 
 import java.util.ArrayList;
 
